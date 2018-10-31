@@ -24,7 +24,7 @@ DEBUG = env.bool('DJANGO_DEBUG', False)
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = 'Asia/Seoul'
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -39,7 +39,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///vople'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'vople',
+        'USER': 'postgres',
+        'PASSWORD': '//aa123123',
+        'HOST': 'localhost',
+        'PORT': '5433',
+    }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -71,6 +78,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'vople.users.apps.UsersAppConfig',
+    'vople.sounds.apps.SoundsConfig',
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

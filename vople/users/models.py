@@ -19,4 +19,4 @@ class User(AbstractUser):
     gender = CharField(max_length=80, choices=GENDER_CHOICES, null=True)
 
     def __str__(self):
-        return str(self.username)
+        return self.username

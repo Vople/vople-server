@@ -29,6 +29,8 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['github.com/mkSpace'])
 #     }
 # }
 
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+
 # SECURITY
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header
@@ -63,7 +65,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['github.com/mkSpace'])
 # https://django-storages.readthedocs.io/en/latest/#installation
 INSTALLED_APPS += ['storages']  # noqa F405
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
-AWS_ACCESS_KEY_ID = env("DJANGO_AWS_ACCESS_KEY_ID")
+AWS_ACCESS_KEY_ID = env('DJANGO_AWS_ACCESS_KEY_ID')
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
 AWS_SECRET_ACCESS_KEY = env('DJANGO_AWS_SECRET_ACCESS_KEY')
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
@@ -76,7 +78,7 @@ _AWS_EXPIRY = 60 * 60 * 24 * 7
 #AWS_S3_OBJECT_PARAMETERS = {
 #    'CacheControl': f'max-age={_AWS_EXPIRY}, s-maxage={_AWS_EXPIRY}, must-revalidate',
 #}
-SECRET_KEY = env('DJANGO_SECRET_KEY')
+
 # DATABASE
 DATABASES = {
     'default': {

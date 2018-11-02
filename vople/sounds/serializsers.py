@@ -1,26 +1,69 @@
 from rest_framework import serializers
 from . import models
+from vople.users.serializers import UserSerializer
 
-class BoardSerializer(serializers.Serializer):
 
+class PresentSerializer(serializers.ModelSerializer):
+    
+    owner = UserSerializer()
+    
     class Meta:
-        model = models.Board
+        model = models.Present
         fields = '__all__'
 
-class CommentSerializer(serializers.Serializer):
 
-    class Meta:
-        model = models.Comment
-        fields = '__all__'
 
-class BoardLikeSerializer(serializers.Serializer):
+class CommentLikeSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = mdoels.BoardLike
-        fields = '__all__'
-
-class CommentLikeSerializer(serializers.Serializer):
+    owner = UserSerializer()
 
     class Meta:
         model = models.CommentLike
         fields = '__all__'
+
+
+class BoardLikeSerializer(serializers.ModelSerializer):
+    
+    owner = UserSerializer()
+
+    class Meta:
+        model = models.BoardLike
+        fields = '__all__'
+
+
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    comment_likes = CommentLikeSerializer(many=True)
+    owner = UserSerializer()
+
+    class Meta:
+        model = models.Comment
+        fields = (
+            'id',
+            'owner',
+            'content',
+            'sound',
+            'comment_likes'
+        )
+
+
+class BoardSerializer(serializers.ModelSerializer):
+
+    owner = UserSerializer()
+    present = PresentSerializer()
+    comments = CommentSerializer(many=True)
+    board_likes = BoardLikeSerializer(many=True)
+
+    class Meta:
+        model = models.Board
+        fields = (
+            'id',
+            'owner',
+            'present',
+            'title',
+            'content',
+            'due_data',
+            'comments',
+            'board_likes'
+        )

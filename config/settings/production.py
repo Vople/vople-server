@@ -1,5 +1,8 @@
 from .base import *  # noqa
 
+
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -28,7 +31,6 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['github.com/mkSpace'])
 #     }
 # }
 
-SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY
 # ------------------------------------------------------------------------------

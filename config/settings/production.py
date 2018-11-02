@@ -147,7 +147,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [  # noqa F405
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL regex.
-ADMIN_URL = env('DJANGO_ADMIN_URL')
+ADMIN_URL = r'^admin/'
 
 # Anymail (Mailgun)
 # ------------------------------------------------------------------------------

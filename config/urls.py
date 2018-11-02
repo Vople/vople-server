@@ -8,7 +8,6 @@ from rest_framework_jwt.views import obtain_jwt_token
 from django.conf.urls import url
 
 urlpatterns = [
-    url(r'^$', admin.site.urls),
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
     # User management

@@ -27,9 +27,9 @@ class ListAllBoardLikes(APIView):
 
         all_board_likes = models.BoardLike.objects.all()
 
-        serializser = serializers.BoardLikeSerializer(all_board_likes, many=True)
+        serializer = serializers.BoardLikeSerializer(all_board_likes, many=True)
 
-        return Response(data=serializser.data)
+        return Response(data=serializer.data)
 
 class ListAllCommentLikes(APIView):
     def get(self, request, format=None):
@@ -45,6 +45,6 @@ class ListAllPresents(APIView):
 
         all_presents = models.Present.objects.all()
 
-        serializer = serializsers.PresentSerializer(all_presents, many=True)
+        serializer = serializers.PresentSerializer(all_presents, many=True)
 
         return Response(data=serializer.data)

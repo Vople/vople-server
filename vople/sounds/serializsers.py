@@ -6,7 +6,7 @@ from vople.users.serializers import UserSerializer
 class PresentSerializer(serializers.ModelSerializer):
     
     owner = UserSerializer()
-    
+
     class Meta:
         model = models.Present
         fields = '__all__'
@@ -63,7 +63,7 @@ class BoardSerializer(serializers.ModelSerializer):
             'present',
             'title',
             'content',
-            'due_data',
+            'due_date',
             'comments',
             'board_likes'
         )

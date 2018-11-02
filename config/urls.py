@@ -9,7 +9,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
-    url(settings.ADMIN_URL, admin.site.urls),
+    path(r'^admin/', admin.site.urls),
     # User management
     path(
         "users/",

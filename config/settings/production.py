@@ -96,7 +96,7 @@ DATABASES = {
 # ------------------------
 
 STATICFILES_STORAGE = 'config.settings.production.StaticRootS3Boto3Storage'
-STATIC_URL = '/static/
+STATIC_URL = '/static/'
 
 # MEDIA
 # ------------------------------------------------------------------------------

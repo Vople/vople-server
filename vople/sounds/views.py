@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from . import models, serializsers
+from . import models, serializers
 
 # Create your views here.
 class ListAllBoards(APIView):
@@ -8,7 +8,7 @@ class ListAllBoards(APIView):
 
         all_boards = models.Board.objects.all()
 
-        serializer = serializsers.BoardSerializer(all_boards, many=True)
+        serializer = serializers.BoardSerializer(all_boards, many=True)
 
         return Response(data=serializer.data)
 
@@ -18,7 +18,7 @@ class ListAllComments(APIView):
 
         all_comments = models.Comment.objects.all()
 
-        serializer = serializsers.CommentSerializer(all_comments, many=True)
+        serializer = serializers.CommentSerializer(all_comments, many=True)
 
         return Response(data=serializer.data)
 

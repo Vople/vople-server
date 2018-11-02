@@ -38,16 +38,7 @@ USE_TZ = True
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('RDS_DB_NAME'),
-        'USER': env('RDS_DB_USERNAME'),
-        'PASSWORD': env('RDS_DB_PASSWORD'),
-        'HOST': env('RDS_DB_HOSTNAME'),
-        'PORT': env('RDS_DB_PORT'),
-    }
-}
+
 #DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # URLS

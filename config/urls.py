@@ -9,7 +9,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
-    path(r'^admin/$', admin.site.urls),
+    path(settings.ADMIN_URL, include("vople.sounds.urls", namespace="sounds"), #admin.site.urls)
     # User management
     path(
         "users/",
@@ -20,9 +20,8 @@ urlpatterns = [
         include("vople.sounds.urls", namespace="sounds"),
     ),
     path("accounts/", include("allauth.urls")),
-    
-    # Your stuff: custom urls includes go here
     url(r'^api-token-auth/', obtain_jwt_token),
+    # Your stuff: custom urls includes go here
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )

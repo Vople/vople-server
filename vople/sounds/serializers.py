@@ -71,7 +71,7 @@ class BoardSerializer(serializers.ModelSerializer):
 class InputSoundSerializer(serializers.ModelSerializer):
 
     class Meta:
-        mode = models.Comment
+        model = models.Comment
         fields = (
             'sound',
         )

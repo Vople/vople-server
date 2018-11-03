@@ -48,3 +48,58 @@ class ListAllPresents(APIView):
         serializer = serializers.PresentSerializer(all_presents, many=True)
 
         return Response(data=serializer.data)
+
+class LikeBoard(APIView):
+    def get(self, request, board_id, format=None):
+
+        user = request.user
+
+        try:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=404)
+
+        try:
+            preExtistingLike = models.BoardLike.objects.get(
+                owner=user,
+                board=found_board
+            )
+            preExtistingLike.delete()
+        except models.BoardLike.DoesNotExist:
+
+            new_like = models.BoardLike.objects.create(
+                owner=user,
+                board=found_board
+            )
+
+            new_like.save()
+
+            return Response(status=200)
+
+
+class LikeComment(APIView):
+    def get(self, request, comment_id, format=None):
+
+        user = request.user
+
+        try:
+            found_comment = models.Comment.objects.get(id=comment_id)
+        except models.Comment.DoesNotExist:
+            return Response(status=404)
+
+        try:
+            preExtistingLike = models.CommentLike.objects.get(
+                owner=user,
+                comment=found_comment
+            )
+            preExtistingLike.delete()
+        except models.Comment.DoesNotExist:
+
+            new_like = models.CommentLike.objects.create(
+                owner=user,
+                comment=found_comment
+            )
+
+            new_like.save()
+
+            return Response(status=200)

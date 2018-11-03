@@ -18,4 +18,3 @@ djangorestframework==3.9.0  # https://github.com/encode/django-rest-framework
 coreapi==2.3.3  # https://github.com/core-api/python-client
 
 djangorestframework-jwt==1.11.0
-django-rest-auth==0.9.3

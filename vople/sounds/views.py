@@ -125,7 +125,7 @@ class CommentOnBoard(APIView):
         if serializer.is_valid():
             serializer.save(
                 owner = user,
-                board = board_id
+                board = found_board
             )
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 

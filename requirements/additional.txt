@@ -1,1 +1,2 @@
 django-rest-auth==0.9.3
+typing==3.6.6

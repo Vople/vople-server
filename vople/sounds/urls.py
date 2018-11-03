@@ -34,7 +34,7 @@ urlpatterns = [
     ),
 
     url(
-        regex=r'^(?P<board_id>\w+)/board_like/'.
+        regex=r'^(?P<board_id>\w+)/board_like/',
         view=views.LikeBoard.as_view(),
         name='like_board',
     ),

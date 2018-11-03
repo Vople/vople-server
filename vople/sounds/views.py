@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from . import models, serializers
 
 # Create your views here.
@@ -57,7 +58,7 @@ class LikeBoard(APIView):
         try:
             found_board = models.Board.objects.get(id=board_id)
         except models.Board.DoesNotExist:
-            return Response(status=404)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         try:
             preExtistingLike = models.BoardLike.objects.get(
@@ -65,6 +66,9 @@ class LikeBoard(APIView):
                 board=found_board
             )
             preExtistingLike.delete()
+
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
         except models.BoardLike.DoesNotExist:
 
             new_like = models.BoardLike.objects.create(
@@ -74,7 +78,7 @@ class LikeBoard(APIView):
 
             new_like.save()
 
-            return Response(status=200)
+            return Response(status=status.HTTP_201_CREATED)
 
 
 class LikeComment(APIView):
@@ -85,7 +89,7 @@ class LikeComment(APIView):
         try:
             found_comment = models.Comment.objects.get(id=comment_id)
         except models.Comment.DoesNotExist:
-            return Response(status=404)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         try:
             preExtistingLike = models.CommentLike.objects.get(
@@ -93,6 +97,8 @@ class LikeComment(APIView):
                 comment=found_comment
             )
             preExtistingLike.delete()
+
+            return Response(status=status.HTTP_204_NO_CONTENT)
         except models.Comment.DoesNotExist:
 
             new_like = models.CommentLike.objects.create(
@@ -102,4 +108,4 @@ class LikeComment(APIView):
 
             new_like.save()
 
-            return Response(status=200)
+            return Response(status=status.HTTP_201_CREATED)

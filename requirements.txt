@@ -1,1 +1,1 @@
--r requirements/production.txt
+django-rest-auth==0.9.3

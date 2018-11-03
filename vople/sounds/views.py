@@ -99,7 +99,7 @@ class LikeComment(APIView):
             preExtistingLike.delete()
 
             return Response(status=status.HTTP_204_NO_CONTENT)
-        except models.Comment.DoesNotExist:
+        except models.CommentLike.DoesNotExist:
 
             new_like = models.CommentLike.objects.create(
                 owner=user,

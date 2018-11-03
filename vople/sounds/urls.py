@@ -34,16 +34,20 @@ urlpatterns = [
     ),
 
     url(
-        regex=r'^(?P<board_id>\w+)/board_like/',
+        regex=r'^(?P<board_id>[0-9]+)/board_like/',
         view=views.LikeBoard.as_view(),
         name='like_board',
     ),
 
     url(
-        regex=r'^(?P<comment_id>\w+)/comment_like/',
+        regex=r'^(?P<comment_id>[0-9]+)/comment_like/',
         view=views.LikeComment.as_view(),
         name='like_comment',
     ),
+    url(
+        regex=r'^(?P<board_id>[0-9] +)/comment/',
+        view=views.CommentOnBoard.as_view(),
+        name='comment_board',
+    ),
 
-    
 ]

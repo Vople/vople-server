@@ -15,7 +15,7 @@ class PresentSerializer(serializers.ModelSerializer):
 
 class CommentLikeSerializer(serializers.ModelSerializer):
 
-    owner = UserSerializer()
+    owner = UserSerializer(read_only=True)
 
     class Meta:
         model = models.CommentLike

@@ -51,7 +51,7 @@ class ListAllPresents(APIView):
         return Response(data=serializer.data)
 
 class LikeBoard(APIView):
-    def get(self, request, board_id, format=None):
+    def post(self, request, board_id, format=None):
 
         user = request.user
 
@@ -82,7 +82,7 @@ class LikeBoard(APIView):
 
 
 class LikeComment(APIView):
-    def get(self, request, comment_id, format=None):
+    def post(self, request, comment_id, format=None):
 
         user = request.user
 
@@ -109,3 +109,27 @@ class LikeComment(APIView):
             new_like.save()
 
             return Response(status=status.HTTP_201_CREATED)
+
+class CommentOnBoard(APIView):
+    def post(self, request, board_id, format=None):
+
+        user = request.user
+
+        try:
+            found_board = models.Board.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = serializers.CommentSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save(
+                owner = user,
+                board = found_board,
+                file = null
+            )
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+        else:
+            
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -116,7 +116,7 @@ class CommentOnBoard(APIView):
         user = request.user
 
         try:
-            found_board = models.Board.get(id=board_id)
+            found_board = models.Board.objects.get(id=board_id)
         except models.Board.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 

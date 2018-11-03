@@ -1,1 +1,1 @@
-django-rest-auth==0.9.3
+-r "requirements/production.txt

@@ -40,7 +40,7 @@ urlpatterns = [
     ),
 
     url(
-        regex=r'^(?P<comment_id>\w+)/comment_like/'.
+        regex=r'^(?P<comment_id>\w+)/comment_like/',
         view=views.LikeComment.as_view(),
         name='like_comment',
     ),

@@ -120,13 +120,12 @@ class CommentOnBoard(APIView):
         except models.Board.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        serializer = serializers.CommentSerializer(data=request.data)
+        serializer = serializers.InputSoundSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save(
                 owner = user,
-                board = found_board,
-                file = null
+                board = board_id
             )
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 

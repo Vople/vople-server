@@ -44,7 +44,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'owner',
             'content',
             'sound',
-            'comment_likes'
+            'comment_likes',
         )
 
 
@@ -65,5 +65,14 @@ class BoardSerializer(serializers.ModelSerializer):
             'content',
             'due_date',
             'comments',
-            'board_likes'
+            'board_likes',
         )
+
+class InputSoundSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        mode = models.Comment
+        fields = (
+            'sound',
+        )
+        

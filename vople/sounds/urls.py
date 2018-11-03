@@ -45,7 +45,7 @@ urlpatterns = [
         name='like_comment',
     ),
     url(
-        regex=r'^(?P<board_id>[0-9] +)/comment/',
+        regex=r'^(?P<board_id>[0-9]+)/comment/',
         view=views.CommentOnBoard.as_view(),
         name='comment_board',
     ),

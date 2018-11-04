@@ -76,10 +76,10 @@ AWS_QUERYSTRING_AUTH = False
 # DO NOT change these unless you know what you're doing.
 AWS_EXPIRY = 60 * 60 * 24 * 7
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
-control = 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY, AWS_EXPIRY)
-AWS_HEADERS = {
-    'Cache-Control': bytes(control, encoding='utf-8')
-}
+#control = 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY, AWS_EXPIRY)
+#AWS_HEADERS = {
+#    'Cache-Control': bytes(control, encoding='utf-8')
+#}
 
 # DATABASE
 DATABASES = {
@@ -222,16 +222,3 @@ LOGGING = {
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        #'rest_framework.authentication.TokenAuthentication',
-        #'rest_framework.authentication.SessionAuthentication',
-        #'rest_framework.authentication.BasicAuthentication',
-    ),
-}
-
-REST_USE_JWT = True

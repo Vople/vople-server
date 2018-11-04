@@ -255,10 +255,6 @@ REST_FRAMEWORK = {
         #'rest_framework.authentication.BasicAuthentication',
     ),
 }
-JWT_AUTH = {
-    # Authorization:Token xxx
-    'JWT_AUTH_HEADER_PREFIX': 'Token',
-}
 
 REST_USE_JWT = True
 ACCOUNT_LOGOUT_ON_GET = True

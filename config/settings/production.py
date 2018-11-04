@@ -181,7 +181,7 @@ AWS_PRELOAD_METADATA = True
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
@@ -196,7 +196,7 @@ LOGGING = {
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
+            'filters': ['require_debug_false', ],
             'class': 'django.utils.log.AdminEmailHandler'
         },
         'console': {
@@ -207,13 +207,13 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['mail_admins', ],
             'level': 'ERROR',
             'propagate': True
         },
         'django.security.DisallowedHost': {
             'level': 'ERROR',
-            'handlers': ['console', 'mail_admins'],
+            'handlers': ['console', 'mail_admins', ],
             'propagate': True
         }
     }
@@ -222,4 +222,3 @@ LOGGING = {
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-REST_USE_JWT = True

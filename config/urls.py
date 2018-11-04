@@ -10,10 +10,13 @@ from django.conf.urls import url
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
 
+
+    url(settings.ADMIN_URL, admin.site.urls),
+
+
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     
-    url(settings.ADMIN_URL, admin.site.urls),
     # User management
     path(
         "users/",

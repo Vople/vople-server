@@ -152,7 +152,8 @@ ADMIN_URL = r'^admin/'
 # Anymail (Mailgun)
 # ------------------------------------------------------------------------------
 # https://anymail.readthedocs.io/en/stable/installation/#installing-anymail
-#INSTALLED_APPS += ['anymail']  # noqa F405
+#INSTALLED_APPS += ['anymail']  # noqa F40
+# 5
 #EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 # https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
 #ANYMAIL = {

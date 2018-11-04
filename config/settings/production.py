@@ -77,9 +77,10 @@ AWS_QUERYSTRING_AUTH = False
 # DO NOT change these unless you know what you're doing.
 _AWS_EXPIRY = 60 * 60 * 24 * 7
 # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
-#AWS_S3_OBJECT_PARAMETERS = {
-#    'CacheControl': f'max-age={_AWS_EXPIRY}, s-maxage={_AWS_EXPIRY}, must-revalidate',
-#}
+control = 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIRY, AWS_EXPIRY)
+AWS_HEADERS = {
+    'Cache-Control': bytes(control, encoding='latin-1')
+}
 
 # DATABASE
 DATABASES = {
@@ -104,20 +105,14 @@ STATIC_URL = 'https://s3.amazonaws.com/%s/static/' % AWS_STORAGE_BUCKET_NAME
 
 # region http://stackoverflow.com/questions/10390244/
 # Full-fledge class: https://stackoverflow.com/a/18046120/104731
-from storages.backends.s3boto3 import S3Boto3Storage  # noqa E402
-
-
-class StaticRootS3Boto3Storage(S3Boto3Storage):
-    location = 'static'
-
-
-class MediaRootS3Boto3Storage(S3Boto3Storage):
-    location = 'media'
-    file_overwrite = False
+from storages.backends.s3boto3 import S3Boto3Storage
+StaticRootS3BotoStorage = lambda: S3Boto3Storage(location='static')  # noqa
+MediaRootS3BotoStorage = lambda: S3Boto3Storage(location='media', file_overwrite=False)  # noqa
 
 
 # endregion
-DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3Boto3Storage'
+
+DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
 MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
 
 # TEMPLATES
@@ -169,7 +164,7 @@ INSTALLED_APPS += ['gunicorn']  # noqa F405
 # Collectfast
 # ------------------------------------------------------------------------------
 # https://github.com/antonagestam/collectfast#installation
-INSTALLED_APPS = ['collectfast'] + INSTALLED_APPS  # noqa F405
+INSTALLED_APPS = ['collectfast', ] + INSTALLED_APPS  # noqa F405
 AWS_PRELOAD_METADATA = True
 
 # LOGGING

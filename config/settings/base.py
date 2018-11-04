@@ -40,6 +40,10 @@ USE_TZ = True
 
 
 #DATABASES['default']['ATOMIC_REQUESTS'] = True
+DATABASES = {
+    'default': env.db('DATABASE_URL', default='postgres://localhost/instagram'),
+}
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # URLS
 # ------------------------------------------------------------------------------

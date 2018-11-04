@@ -66,9 +66,9 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-    'rest_auth.registration',
+    #'rest_framework.authtoken',
+    #'rest_auth',
+    #'rest_auth.registration',
 ]
 LOCAL_APPS = [
     'vople.users.apps.UsersAppConfig',
@@ -246,9 +246,10 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        #'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
-REST_USE_JWT = True
-ACCOUNT_LOGOUT_ON_GET = True
+# REST_USE_JWT = True
+# ACCOUNT_LOGOUT_ON_GET = True

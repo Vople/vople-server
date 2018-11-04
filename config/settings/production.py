@@ -94,11 +94,6 @@ DATABASES = {
     }
 }
 
-
-from storages.backends.s3boto3 import S3Boto3Storage
-StaticRootS3BotoStorage = lambda: S3Boto3Storage(location='static')  # noqa
-MediaRootS3BotoStorage = lambda: S3Boto3Storage(location='media', file_overwrite=False)  # noqa
-
 # STATIC
 # ------------------------
 
@@ -110,11 +105,20 @@ STATIC_URL = 'https://s3.amazonaws.com/%s/static/' % AWS_STORAGE_BUCKET_NAME
 
 # region http://stackoverflow.com/questions/10390244/
 # Full-fledge class: https://stackoverflow.com/a/18046120/104731
+from storages.backends.s3boto3 import S3Boto3Storage  # noqa E402
+
+
+class StaticRootS3Boto3Storage(S3Boto3Storage):
+    location = 'static'
+
+
+class MediaRootS3Boto3Storage(S3Boto3Storage):
+    location = 'media'
+    file_overwrite = False
 
 
 # endregion
-
-DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
+DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3Boto3Storage'
 MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_STORAGE_BUCKET_NAME
 
 # TEMPLATES
@@ -166,7 +170,7 @@ INSTALLED_APPS += ['gunicorn']  # noqa F405
 # Collectfast
 # ------------------------------------------------------------------------------
 # https://github.com/antonagestam/collectfast#installation
-INSTALLED_APPS = ['collectfast', ] + INSTALLED_APPS  # noqa F405
+INSTALLED_APPS = ['collectfast'] + INSTALLED_APPS  # noqa F405
 AWS_PRELOAD_METADATA = True
 
 # LOGGING

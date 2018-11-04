@@ -9,6 +9,10 @@ from django.conf.urls import url
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
+
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    
     url(settings.ADMIN_URL, admin.site.urls),
     # User management
     path(
@@ -20,8 +24,6 @@ urlpatterns = [
         include("vople.sounds.urls", namespace="sounds"),
     ),
     path("accounts/", include("allauth.urls")),
-    url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     # Your stuff: custom urls includes go here
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT

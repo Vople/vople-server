@@ -28,9 +28,9 @@ urlpatterns = [
     ),
 
     url (
-        regex=r'^presents/$',
-        view=views.ListAllPresents.as_view(),
-        name='all_presents',
+        regex=r'^gifts/$',
+        view=views.ListAllGifts.as_view(),
+        name='all_gifts',
     ),
 
     url(

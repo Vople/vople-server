@@ -9,5 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id',
             'username',
             'name',
-            'gender'
+            'gender',
+            'followers',
+            'followings',
         )

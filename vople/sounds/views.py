@@ -47,17 +47,17 @@ class ListAllBoards(APIView):
 
         serializer = serializers.InputBoardSerializer(data=request.data)
 
-        present_id = request.data['present_id']
+        gift_id = request.data['gift_id']
 
         try:
-            found_present = models.Present.objects.get(id=present_id)
-        except models.Present.DoesNotExist:
+            found_gift = models.Gift.objects.get(id=gift_id)
+        except models.Gift.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         if serializer.is_valid():
             serializer.save(
                 owner = user,
-                present = found_present,
+                gift = found_gift,
                 )
 
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
@@ -93,12 +93,12 @@ class ListAllCommentLikes(APIView):
 
         return Response(data=serializer.data)
 
-class ListAllPresents(APIView):
+class ListAllGifts(APIView):
     def get(self, request, format=None):
 
-        all_presents = models.Present.objects.all()
+        all_gifts = models.Gift.objects.all()
 
-        serializer = serializers.PresentSerializer(all_presents, many=True)
+        serializer = serializers.GiftSerializer(all_gifts, many=True)
 
         return Response(data=serializer.data)
 

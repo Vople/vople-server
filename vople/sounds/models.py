@@ -9,7 +9,7 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
-class Present(TimeStampedModel):
+class Gift(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     name = models.CharField(max_length=50, null=False)
     price = models.IntegerField(default=0)
@@ -22,7 +22,7 @@ class Like(TimeStampedModel):
 
 class Board(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
-    present = models.ForeignKey(Present, on_delete=models.DO_NOTHING, null=True)
+    gift = models.ForeignKey(Gift, on_delete=models.DO_NOTHING, null=True)
     title = models.CharField(max_length=100, null=False, default="_REMOVE_")
     content = models.TextField(null=False, default="_REMOVE_")
     due_date = models.DateTimeField(null=True)

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import TextField, CharField
+from django.db.models import TextField, CharField, ManyToManyField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -17,6 +17,8 @@ class User(AbstractUser):
     name = CharField(_("Name of User"), blank=True, max_length=255)
     bio = TextField(null=True)
     gender = CharField(max_length=80, choices=GENDER_CHOICES, null=True)
+    followers = ManyToManyField(self, null=True)
+    followings = ManyToManyField(self, null=True)
 
     def __str__(self):
         return self.username

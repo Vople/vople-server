@@ -4,7 +4,7 @@ from vople.users.serializers import UserSerializer
 from rest_framework import pagination
 
 
-class PresentSerializer(serializers.ModelSerializer):
+class GiftSerializer(serializers.ModelSerializer):
     
     owner = UserSerializer()
 
@@ -52,7 +52,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class BoardSerializer(serializers.ModelSerializer):
 
     owner = UserSerializer()
-    present = PresentSerializer()
+    present = GiftSerializer()
     comments = CommentSerializer(many=True)
     board_likes = BoardLikeSerializer(many=True)
 

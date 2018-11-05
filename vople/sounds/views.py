@@ -184,3 +184,17 @@ class CommentOnBoard(APIView):
         else:
             
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BoardDetailView(APIView):
+    def get(self, request, board_id, format=None):
+
+        user = request.user
+
+        try:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = serializers.BoardSerializer(found_board)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)

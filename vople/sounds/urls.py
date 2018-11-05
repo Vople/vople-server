@@ -49,4 +49,10 @@ urlpatterns = [
         view=views.CommentOnBoard.as_view(),
         name='comment_board',
     ),
+
+    url(
+        regex=r'^(?P<board_id>[0-9]+)/board/',
+        view=view.BoardDetailView.as_view(),
+        name='board_detail'
+    ),
 ]

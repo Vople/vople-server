@@ -14,6 +14,20 @@ class ListAllBoards(APIView):
 
         return Response(data=serializer.data)
 
+    def post(self, request, format=None):
+
+        user = request.user
+
+        serializer = serializers.BoardSerializer(data=request.data)
+
+        serializer.is_valid():
+            serializer.save(owner = user)
+
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ListAllComments(APIView):
     def get(self, request, format=None):

@@ -25,7 +25,7 @@ urlpatterns = [
         include("vople.users.urls", namespace="users"),
     ),
     path(
-        "boards/",
+        "/",
         include("vople.sounds.urls", namespace="sounds"),
     ),
     path("accounts/", include("allauth.urls")),

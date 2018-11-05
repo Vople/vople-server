@@ -4,9 +4,9 @@ from . import views
 app_name = "sounds"
 urlpatterns = [
     url (
-        regex=r'^all/$',
+        regex=r'^board/$',
         view=views.ListAllBoards.as_view(),
-        name='all_boards',
+        name='boards',
     ),
 
     url (
@@ -49,5 +49,4 @@ urlpatterns = [
         view=views.CommentOnBoard.as_view(),
         name='comment_board',
     ),
-
 ]

@@ -24,9 +24,9 @@ class ListAllBoards(APIView):
 
         # serializer = serializers.PaginatedBoardSerializer.__init__(all_boards, many=True)
 
-        queryset = Billing.objects.all()
-        serializer_class = BillingRecordsSerializer
-        pagination_class = LargeResultsSetPagination
+        queryset = models.Board.objects.all()
+        serializer_class = serializers.BoardSerializer
+        pagination_class = serializers.PaginatedBoardSerializer
 
         #return Response(data=serializer.data, status=status.HTTP_200_OK)
 

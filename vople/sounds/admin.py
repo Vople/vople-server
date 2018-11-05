@@ -19,6 +19,6 @@ class BoardLikeAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(models.Present)
-class PresentAdmin(admin.ModelAdmin):
+@admin.register(models.Gift)
+class GiftAdmin(admin.ModelAdmin):
     pass

@@ -52,7 +52,7 @@ urlpatterns = [
 
     url(
         regex=r'^(?P<board_id>[0-9]+)/board/',
-        view=view.BoardDetailView.as_view(),
+        view=views.BoardDetailView.as_view(),
         name='board_detail'
     ),
 ]

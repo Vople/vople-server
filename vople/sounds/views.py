@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import models, serializers
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 class ListAllBoards(APIView):
@@ -10,9 +10,22 @@ class ListAllBoards(APIView):
 
         all_boards = models.Board.objects.all()
 
-        serializer = serializers.BoardSerializer(all_boards, many=True)
+        paginator = Paginator(all_boards, 20)
 
-        return Response(data=serializer.data)
+        page = request.QUERY_PARAMS.get('page')
+
+        try:
+            boards = paginator.page(page)
+        except PageNotAnInteger:
+        
+            boards = paginator.page(1)
+        except EmptyPage:
+            boards = paginator.page(paginator.num_pages)
+
+        serializer_context = {'request': request}
+        serializer = serializer.PaginatedBoardSerializer(boards, context=serializer_context)    
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
 

@@ -8,23 +8,27 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 class ListAllBoards(APIView):
     def get(self, request, format=None):
 
-        all_boards = models.Board.objects.all()
+        # all_boards = models.Board.objects.all()
 
-        paginator = Paginator(all_boards, 20)
+        # paginator = Paginator(all_boards, 20)
 
-        page = request.GET.get('page')
+        # page = request.GET.get('page')
 
-        try:
-            boards = paginator.page(page)
-        except PageNotAnInteger:
+        # try:
+        #     boards = paginator.page(page)
+        # except PageNotAnInteger:
         
-            boards = paginator.page(1)
-        except EmptyPage:
-            boards = paginator.page(paginator.num_pages)
+        #     boards = paginator.page(1)
+        # except EmptyPage:
+        #     boards = paginator.page(paginator.num_pages)
 
-        serializer = serializers.PaginatedBoardSerializer.__init__(all_boards, many=True)
+        # serializer = serializers.PaginatedBoardSerializer.__init__(all_boards, many=True)
 
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+        queryset = Billing.objects.all()
+        serializer_class = BillingRecordsSerializer
+        pagination_class = LargeResultsSetPagination
+
+        #return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
 

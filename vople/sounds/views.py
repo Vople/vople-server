@@ -8,24 +8,27 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 class ListAllBoards(APIView):
     def get(self, request, format=None):
 
-        # all_boards = models.Board.objects.all()
+        boards = models.Board.objects.all()
 
-        # paginator = Paginator(all_boards, 20)
+        paginator = Paginator(all_boards, 20)
 
-        # page = request.GET.get('page')
+        page = request.GET.get('page')
 
-        # try:
-        #     boards = paginator.page(page)
-        # except PageNotAnInteger:
+        try:
+            boards = paginator.page(page)
+        except PageNotAnInteger:
         
-        #     boards = paginator.page(1)
-        # except EmptyPage:
-        #     boards = paginator.page(paginator.num_pages)
+            boards = paginator.page(1)
+        except EmptyPage:
+            boards = paginator.page(paginator.num_pages)
 
-        # serializer = serializers.PaginatedBoardSerializer.__init__(all_boards, many=True)
 
-        queryset = models.Board.objects.all()
-        serializer_class = serializers.BoardSerializer
+        serializer = serializers.BoardSerializer(boards, many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+        #queryset = models.Board.objects.all()
+        #serializer_class = serializers.BoardSerializer
 
         #filter_backends = (filters.SearchFilter,django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter,)
         #search_fields = ('job_name', 'company')
@@ -33,7 +36,7 @@ class ListAllBoards(APIView):
         #ordering_fields = ('job_name','company')
         #ordering = ('job_name')
 
-        pagination_class = serializers.PaginatedBoardSerializer
+        #pagination_class = serializers.PaginatedBoardSerializer
 
 
         #return Response(data=serializer.data, status=status.HTTP_200_OK)

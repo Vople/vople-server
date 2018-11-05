@@ -20,7 +20,7 @@ class ListAllBoards(APIView):
 
         serializer = serializers.InputBoardSerializer(data=request.data)
 
-        present_id = request.data[present_id]
+        present_id = request.data['present_id']
 
         try:
             found_present = models.Present.objects.get(id=present_id)

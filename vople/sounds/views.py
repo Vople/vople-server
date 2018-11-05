@@ -28,6 +28,8 @@ class ListAllBoards(APIView):
         serializer_class = serializers.BoardSerializer
         pagination_class = serializers.PaginatedBoardSerializer
 
+        pagination_class.get_paginated_response()
+
         #return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):

@@ -18,10 +18,20 @@ class ListAllBoards(APIView):
 
         user = request.user
 
-        serializer = serializers.BoardSerializer(data=request.data)
+        serializer = serializers.InputBoardSerializer(data=request.data)
+
+        present_id = request.data[present_id]
+
+        try:
+            found_present = models.Present.objects.get(id=present_id)
+        except models.Present.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         if serializer.is_valid():
-            serializer.save(owner = user)
+            serializer.save(
+                owner = user,
+                present = found_present,
+                )
 
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 

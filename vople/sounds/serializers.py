@@ -76,3 +76,12 @@ class InputSoundSerializer(serializers.ModelSerializer):
             'sound',
         )
         
+class InputBoardSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Board
+        fields = (
+            'title',
+            'content',
+            'due_date',
+        )

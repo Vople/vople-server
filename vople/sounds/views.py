@@ -12,7 +12,7 @@ class ListAllBoards(APIView):
 
         paginator = Paginator(all_boards, 20)
 
-        page = request.QUERY_PARAMS.get('page')
+        page = request.GET.get('page')
 
         try:
             boards = paginator.page(page)

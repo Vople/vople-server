@@ -87,7 +87,7 @@ class InputBoardSerializer(serializers.ModelSerializer):
             'due_date',
         )
 
-class PaginatedBoardSerializer(pagination.BasePagination):
+class PaginatedBoardSerializer(pagination.PageNumberPagination):
     
     class Meta:
         object_serializer_class = BoardSerializer

@@ -22,7 +22,7 @@ class ListAllBoards(APIView):
         except EmptyPage:
             boards = paginator.page(paginator.num_pages)
 
-        serializer = serializers.PaginatedBoardSerializer(boards)
+        serializer = serializers.PaginatedBoardSerializer(boards, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 

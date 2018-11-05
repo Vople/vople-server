@@ -9,7 +9,7 @@ class GiftSerializer(serializers.ModelSerializer):
     owner = UserSerializer()
 
     class Meta:
-        model = models.Present
+        model = models.Gift
         fields = '__all__'
 
 

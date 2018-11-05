@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from . import models
 from vople.users.serializers import UserSerializer
-from rest_framework.pagination import PaginationSerializer
+from rest_framework import pagination
 
 
 class PresentSerializer(serializers.ModelSerializer):
@@ -87,7 +87,7 @@ class InputBoardSerializer(serializers.ModelSerializer):
             'due_date',
         )
 
-class PaginatedBoardSerializer(PaginationSerializer):
+class PaginatedBoardSerializer(pagination.PaginationSerializer):
     
     class Meta:
         object_serializer_class = BoardSerializer

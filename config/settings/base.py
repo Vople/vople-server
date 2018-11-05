@@ -69,7 +69,6 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_framework.pagination',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -255,9 +254,6 @@ REST_FRAMEWORK = {
         #'rest_framework.authentication.SessionAuthentication',
         #'rest_framework.authentication.BasicAuthentication',
     ),
-
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100,
 }
 
 REST_USE_JWT = True

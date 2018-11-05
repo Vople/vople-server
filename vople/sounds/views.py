@@ -20,7 +20,7 @@ class ListAllBoards(APIView):
 
         serializer = serializers.BoardSerializer(data=request.data)
 
-        serializer.is_valid():
+        if serializer.is_valid():
             serializer.save(owner = user)
 
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)

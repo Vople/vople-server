@@ -89,6 +89,9 @@ class InputBoardSerializer(serializers.ModelSerializer):
 
 class PaginatedBoardSerializer(pagination.PageNumberPagination):
     
+    page_size = 20
+    page_size_query_param = 'page_size'
+
     def get_paginated_response(self, data):
         return Response({
             'links': {
@@ -98,7 +101,4 @@ class PaginatedBoardSerializer(pagination.PageNumberPagination):
             'count': self.page.paginator.count,
             'results': data
         })
-    
-    class Meta:
-        object_serializer_class = BoardSerializer
 

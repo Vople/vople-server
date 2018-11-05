@@ -26,9 +26,15 @@ class ListAllBoards(APIView):
 
         queryset = models.Board.objects.all()
         serializer_class = serializers.BoardSerializer
+
+        #filter_backends = (filters.SearchFilter,django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter,)
+        #search_fields = ('job_name', 'company')
+        #filter_fields = ('job_name', 'company')
+        #ordering_fields = ('job_name','company')
+        #ordering = ('job_name')
+
         pagination_class = serializers.PaginatedBoardSerializer
 
-        pagination_class.get_paginated_response(queryset)
 
         #return Response(data=serializer.data, status=status.HTTP_200_OK)
 

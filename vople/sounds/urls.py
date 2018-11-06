@@ -4,9 +4,9 @@ from . import views
 app_name = "sounds"
 urlpatterns = [
     url (
-        regex=r'^board/$',
+        regex=r'^event/$',
         view=views.ListAllBoards.as_view(),
-        name='boards',
+        name='events',
     ),
 
     url (
@@ -22,9 +22,9 @@ urlpatterns = [
     ),
 
     url (
-        regex=r'^board_likes/$',
+        regex=r'^event_likes/$',
         view=views.ListAllBoardLikes.as_view(),
-        name='all_board_likes',
+        name='all_event_likes',
     ),
 
     url (
@@ -35,8 +35,8 @@ urlpatterns = [
 
     url(
         regex=r'^(?P<board_id>[0-9]+)/board_like/',
-        view=views.LikeBoard.as_view(),
-        name='like_board',
+        view=views.LikeEvent.as_view(),
+        name='like_event',
     ),
 
     url(
@@ -46,13 +46,13 @@ urlpatterns = [
     ),
     url(
         regex=r'^(?P<board_id>[0-9]+)/comment/',
-        view=views.CommentOnBoard.as_view(),
-        name='comment_board',
+        view=views.CommentOnEvent.as_view(),
+        name='comment_event',
     ),
 
     url(
         regex=r'^(?P<board_id>[0-9]+)/board/',
-        view=views.BoardDetailView.as_view(),
-        name='board_detail'
+        view=views.EventDetailView.as_view(),
+        name='event_detail'
     ),
 ]

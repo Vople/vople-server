@@ -23,12 +23,12 @@ class CommentLikeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class BoardLikeSerializer(serializers.ModelSerializer):
+class EventLikeSerializer(serializers.ModelSerializer):
     
     owner = UserSerializer()
 
     class Meta:
-        model = models.BoardLike
+        model = models.EventLike
         fields = '__all__'
 
 
@@ -49,15 +49,15 @@ class CommentSerializer(serializers.ModelSerializer):
         )
 
 
-class BoardSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
 
     owner = UserSerializer()
     present = GiftSerializer()
     comments = CommentSerializer(many=True)
-    board_likes = BoardLikeSerializer(many=True)
+    event_likes = EventLikeSerializer(many=True)
 
     class Meta:
-        model = models.Board
+        model = models.Event
         fields = (
             'id',
             'owner',
@@ -66,7 +66,7 @@ class BoardSerializer(serializers.ModelSerializer):
             'content',
             'due_date',
             'comments',
-            'board_likes',
+            'event_likes',
         )
 
 class InputSoundSerializer(serializers.ModelSerializer):
@@ -77,10 +77,10 @@ class InputSoundSerializer(serializers.ModelSerializer):
             'sound',
         )
         
-class InputBoardSerializer(serializers.ModelSerializer):
+class InputEventSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Board
+        model = models.Event
         fields = (
             'title',
             'content',

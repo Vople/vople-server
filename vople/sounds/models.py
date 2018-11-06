@@ -20,7 +20,7 @@ class Gift(TimeStampedModel):
 class Like(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
 
-class Board(TimeStampedModel):
+class Event(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
     gift = models.ForeignKey(Gift, on_delete=models.DO_NOTHING, null=True)
     title = models.CharField(max_length=100, null=False, default="_REMOVE_")
@@ -32,7 +32,7 @@ class Board(TimeStampedModel):
 
 class Comment(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
-    board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=True, related_name="comments")
+    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING, null=True, related_name="comments")
     content = models.TextField(null=True)
     sound = models.FileField(null=True)
 
@@ -40,10 +40,10 @@ class Comment(TimeStampedModel):
         return self.content
 
 class BoardLike(Like):
-    board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
+    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
 
     def __str__(self):
-        return self.owner.username + " : " + self.board.totle
+        return self.owner.username + " : " + self.event.title
     
 
 class CommentLike(Like):

@@ -12,7 +12,7 @@ class ListAllEvents(APIView):
 
         paginator = Paginator(events, 20)
 
-        page = request.quert_marams.get('page')
+        page = request.query_params.get('page')
 
         try:
             events = paginator.page(page)

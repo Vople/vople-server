@@ -48,3 +48,6 @@ class BoardLike(Like):
 
 class CommentLike(Like):
     comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=False, related_name="comment_likes")
+
+    def __str__(self):
+        return self.owner.username + ": " + self.comment.board.title

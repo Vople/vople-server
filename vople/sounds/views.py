@@ -5,30 +5,30 @@ from . import models, serializers
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
-class ListAllEvents(APIView):
+class ListAllBoards(APIView):
     def get(self, request, format=None):
 
-        events = models.Event.objects.all()
+        boards = models.Board.objects.all()
 
-        paginator = Paginator(events, 20)
+        paginator = Paginator(boards, 20)
 
-        page = request.query_params.get('page')
+        page = request.GET.get('page')
 
         try:
-            events = paginator.page(page)
+            boards = paginator.page(page)
         except PageNotAnInteger:
         
-            events = paginator.page(1)
+            boards = paginator.page(1)
         except EmptyPage:
-            events = paginator.page(paginator.num_pages)
+            boards = paginator.page(paginator.num_pages)
 
 
-        serializer = serializers.EventSerializer(events, many=True)
+        serializer = serializers.BoardSerializer(boards, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-        #queryset = models.Event.objects.all()
-        #serializer_class = serializers.EventSerializer
+        #queryset = models.Board.objects.all()
+        #serializer_class = serializers.BoardSerializer
 
         #filter_backends = (filters.SearchFilter,django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter,)
         #search_fields = ('job_name', 'company')
@@ -36,7 +36,7 @@ class ListAllEvents(APIView):
         #ordering_fields = ('job_name','company')
         #ordering = ('job_name')
 
-        #pagination_class = serializers.PaginatedEventSerializer
+        #pagination_class = serializers.PaginatedBoardSerializer
 
 
         #return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -45,19 +45,19 @@ class ListAllEvents(APIView):
 
         user = request.user
 
-        serializer = serializers.InputEventSerializer(data=request.data)
+        serializer = serializers.InputBoardSerializer(data=request.data)
 
-        gift_id = request.data['gift_id']
+        present_id = request.data['present_id']
 
         try:
-            found_gift = models.Gift.objects.get(id=gift_id)
-        except models.Gift.DoesNotExist:
+            found_present = models.Present.objects.get(id=present_id)
+        except models.Present.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         if serializer.is_valid():
             serializer.save(
                 owner = user,
-                gift = found_gift,
+                present = found_present,
                 )
 
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
@@ -75,12 +75,12 @@ class ListAllComments(APIView):
 
         return Response(data=serializer.data)
 
-class ListAllEventLikes(APIView):
+class ListAllBoardLikes(APIView):
     def get(self, request, format=None):
 
-        all_event_likes = models.EventLike.objects.all()
+        all_board_likes = models.BoardLike.objects.all()
 
-        serializer = serializers.EventLikeSerializer(all_event_likes, many=True)
+        serializer = serializers.BoardLikeSerializer(all_board_likes, many=True)
 
         return Response(data=serializer.data)
 
@@ -93,39 +93,39 @@ class ListAllCommentLikes(APIView):
 
         return Response(data=serializer.data)
 
-class ListAllGifts(APIView):
+class ListAllPresents(APIView):
     def get(self, request, format=None):
 
-        all_gifts = models.Gift.objects.all()
+        all_presents = models.Present.objects.all()
 
-        serializer = serializers.GiftSerializer(all_gifts, many=True)
+        serializer = serializers.PresentSerializer(all_presents, many=True)
 
         return Response(data=serializer.data)
 
-class LikeEvent(APIView):
-    def post(self, request, Event_id, format=None):
+class LikeBoard(APIView):
+    def post(self, request, board_id, format=None):
 
         user = request.user
 
         try:
-            found_Event = models.Event.objects.get(id=Event_id)
-        except models.Event.DoesNotExist:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         try:
-            preExtistingLike = models.EventLike.objects.get(
+            preExtistingLike = models.BoardLike.objects.get(
                 owner=user,
-                Event=found_Event
+                board=found_board
             )
             preExtistingLike.delete()
 
             return Response(status=status.HTTP_204_NO_CONTENT)
 
-        except models.EventLike.DoesNotExist:
+        except models.BoardLike.DoesNotExist:
 
-            new_like = models.EventLike.objects.create(
+            new_like = models.BoardLike.objects.create(
                 owner=user,
-                Event=found_Event
+                board=found_board
             )
 
             new_like.save()
@@ -162,14 +162,14 @@ class LikeComment(APIView):
 
             return Response(status=status.HTTP_201_CREATED)
 
-class CommentOnEvent(APIView):
-    def post(self, request, Event_id, format=None):
+class CommentOnBoard(APIView):
+    def post(self, request, board_id, format=None):
 
         user = request.user
 
         try:
-            found_event = models.Event.objects.get(id=Event_id)
-        except models.Event.DoesNotExist:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = serializers.InputSoundSerializer(data=request.data)
@@ -177,7 +177,7 @@ class CommentOnEvent(APIView):
         if serializer.is_valid():
             serializer.save(
                 owner = user,
-                Event = found_event
+                board = found_board
             )
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
@@ -185,16 +185,16 @@ class CommentOnEvent(APIView):
             
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class EventDetailView(APIView):
-    def get(self, request, Event_id, format=None):
+class BoardDetailView(APIView):
+    def get(self, request, board_id, format=None):
 
         user = request.user
 
         try:
-            found_event = models.Event.objects.get(id=Event_id)
-        except models.Event.DoesNotExist:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        serializer = serializers.EventSerializer(found_event)
+        serializer = serializers.BoardSerializer(found_board)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)

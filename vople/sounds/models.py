@@ -9,7 +9,7 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
-class Gift(TimeStampedModel):
+class Present(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     name = models.CharField(max_length=50, null=False)
     price = models.IntegerField(default=0)
@@ -20,9 +20,9 @@ class Gift(TimeStampedModel):
 class Like(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
 
-class Event(TimeStampedModel):
+class Board(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
-    gift = models.ForeignKey(Gift, on_delete=models.DO_NOTHING, null=True)
+    present = models.ForeignKey(Present, on_delete=models.DO_NOTHING, null=True)
     title = models.CharField(max_length=100, null=False, default="_REMOVE_")
     content = models.TextField(null=False, default="_REMOVE_")
     due_date = models.DateTimeField(null=True)
@@ -32,18 +32,18 @@ class Event(TimeStampedModel):
 
 class Comment(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
-    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING, null=True, related_name="comments")
+    board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=True, related_name="comments")
     content = models.TextField(null=True)
     sound = models.FileField(null=True)
 
     def __str__(self):
         return self.content
 
-class EventLike(Like):
-    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
+class BoardLike(Like):
+    board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
 
     def __str__(self):
-        return self.owner.username + " : " + self.event.title
+        return self.owner.username + " : " + self.board.totle
     
 
 class CommentLike(Like):

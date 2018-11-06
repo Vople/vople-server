@@ -4,12 +4,12 @@ from vople.users.serializers import UserSerializer
 from rest_framework import pagination
 
 
-class GiftSerializer(serializers.ModelSerializer):
+class PresentSerializer(serializers.ModelSerializer):
     
     owner = UserSerializer()
 
     class Meta:
-        model = models.Gift
+        model = models.Present
         fields = '__all__'
 
 
@@ -23,12 +23,12 @@ class CommentLikeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class EventLikeSerializer(serializers.ModelSerializer):
+class BoardLikeSerializer(serializers.ModelSerializer):
     
     owner = UserSerializer()
 
     class Meta:
-        model = models.EventLike
+        model = models.BoardLike
         fields = '__all__'
 
 
@@ -49,15 +49,15 @@ class CommentSerializer(serializers.ModelSerializer):
         )
 
 
-class EventSerializer(serializers.ModelSerializer):
+class BoardSerializer(serializers.ModelSerializer):
 
     owner = UserSerializer()
-    present = GiftSerializer()
+    present = PresentSerializer()
     comments = CommentSerializer(many=True)
-    event_likes = EventLikeSerializer(many=True)
+    board_likes = BoardLikeSerializer(many=True)
 
     class Meta:
-        model = models.Event
+        model = models.Board
         fields = (
             'id',
             'owner',
@@ -66,7 +66,7 @@ class EventSerializer(serializers.ModelSerializer):
             'content',
             'due_date',
             'comments',
-            'event_likes',
+            'board_likes',
         )
 
 class InputSoundSerializer(serializers.ModelSerializer):
@@ -77,10 +77,10 @@ class InputSoundSerializer(serializers.ModelSerializer):
             'sound',
         )
         
-class InputEventSerializer(serializers.ModelSerializer):
+class InputBoardSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.Event
+        model = models.Board
         fields = (
             'title',
             'content',

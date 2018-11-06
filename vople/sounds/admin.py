@@ -3,22 +3,22 @@ from . import models
 
 # Register your models here.
 
-@admin.register(models.Event)
-class EventAdmin(admin.ModelAdmin):
+@admin.register(models.Board)
+class BoardAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(models.CommentLike)
 class CommentLikeAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(models.EventLike)
-class EventLikeAdmin(admin.ModelAdmin):
+@admin.register(models.BoardLike)
+class BoardLikeAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(models.Comment)
 class CommentAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(models.Gift)
-class GiftAdmin(admin.ModelAdmin):
+@admin.register(models.Present)
+class PresentAdmin(admin.ModelAdmin):
     pass

@@ -20,14 +20,4 @@ class Migration(migrations.Migration):
             name='gender',
             field=models.CharField(choices=[('male', 'Male'), ('female', 'Female'), ('non-choice', 'Non-Choice')], max_length=80, null=True),
         ),
-        migrations.AddField(
-            model_name='user',
-            name='followers',
-            field=models.ManyToManyField('self', blank=True, null=True),
-        ),
-        migrations.AddField(
-            model_name='user',
-            name='following',
-            field=models.ManyToManyField('self', blank=True, null=True),
-        ),
     ]

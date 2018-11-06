@@ -74,8 +74,6 @@ THIRD_PARTY_APPS = [
     'rest_auth',
     'rest_auth.registration',
 
-
-    'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
 ]
 LOCAL_APPS = [

@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from rest_framework import status
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from . import models
 
 User = get_user_model()
 
@@ -59,8 +60,8 @@ class FollowUser(APIView):
         user = request.user
 
         try:
-            found_user = User.objects.get(id=user_id)
-        except User.DoesNotExist:
+            found_user = models.User.objects.get(id=user_id)
+        except models.User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         user.following.add(found_user)
@@ -76,8 +77,8 @@ class UnFollowUser(APIView):
         user = request.user
 
         try:
-            found_user = User.objects.get(id=user_id)
-        except User.DoesNotExist:
+            found_user = models.User.objects.get(id=user_id)
+        except models.User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         user.following.remove(found_user)

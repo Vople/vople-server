@@ -37,7 +37,7 @@ class Comment(TimeStampedModel):
     sound = models.FileField(null=True)
 
     def __str__(self):
-        return self.content
+        return self.board.title
 
 class BoardLike(Like):
     board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
@@ -48,6 +48,3 @@ class BoardLike(Like):
 
 class CommentLike(Like):
     comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=False, related_name="comment_likes")
-
-    def __str__(self):
-        return self.owner.username

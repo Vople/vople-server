@@ -27,5 +27,5 @@ urlpatterns = [
         view=views.UnFollowUser.as_view(),
         name='unfollow_user',
     ),
-    url(r'^login/facebook/$', view.FacebookLogin.as_view(), name='fb_login'),
+    url(r'^login/facebook/$', views.FacebookLogin.as_view(), name='fb_login'),
 ]

@@ -43,7 +43,7 @@ class BoardLike(Like):
     board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
 
     def __str__(self):
-        return self.owner.username + " : " + self.board.totle
+        return self.owner.username + " : " + self.board.title
     
 
 class CommentLike(Like):

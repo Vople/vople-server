@@ -5,7 +5,7 @@ app_name = "sounds"
 urlpatterns = [
     url (
         regex=r'^event/$',
-        view=views.ListAllBoards.as_view(),
+        view=views.ListAllEvents.as_view(),
         name='events',
     ),
 
@@ -23,7 +23,7 @@ urlpatterns = [
 
     url (
         regex=r'^event_likes/$',
-        view=views.ListAllBoardLikes.as_view(),
+        view=views.ListAllEventLikes.as_view(),
         name='all_event_likes',
     ),
 

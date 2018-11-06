@@ -39,7 +39,7 @@ class Comment(TimeStampedModel):
     def __str__(self):
         return self.content
 
-class BoardLike(Like):
+class EventLike(Like):
     event = models.ForeignKey(Event, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
 
     def __str__(self):

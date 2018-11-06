@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from rest_framework import status
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from rest_framework.response import Response
 from . import models
 
 User = get_user_model()

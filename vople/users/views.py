@@ -63,7 +63,7 @@ class FollowUser(APIView):
         except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        user.followings.add(found_user)
+        user.following.add(found_user)
 
         user.save()
 
@@ -80,7 +80,7 @@ class UnFollowUser(APIView):
         except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        user.followings.remove(found_user)
+        user.following.remove(found_user)
 
         user.save()
 

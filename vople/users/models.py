@@ -17,8 +17,8 @@ class User(AbstractUser):
     name = CharField(_("Name of User"), blank=True, max_length=255)
     bio = TextField(null=True)
     gender = CharField(max_length=80, choices=GENDER_CHOICES, null=True)
-    followers = ManyToManyField('self', blank=True, related_name="follow_users", null=True)
-    followings = ManyToManyField('self', blank=True, related_name="following_users", null=True)
+    followers = ManyToManyField('self', blank=True, null=True)
+    following = ManyToManyField('self', blank=True, null=True)
 
     def __str__(self):
         return self.username

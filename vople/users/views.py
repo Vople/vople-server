@@ -1,6 +1,8 @@
+from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from rest_framework import status
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 User = get_user_model()
@@ -50,3 +52,36 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+class FollowUser(APIView):
+    def post(self, request, user_id, format=None):
+
+        user = request.user
+
+        try:
+            found_user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        user.followings.add(found_user)
+
+        user.save()
+
+        return Response(status=status.HTTP_200_OK)
+
+        
+class UnFollowUser(APIView):
+    def post(self, request, user_id, format=None):
+
+        user = request.user
+
+        try:
+            found_user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        user.followings.remove(found_user)
+
+        user.save()
+
+        return Response(status=status.HTTP_200_OK)

@@ -5,30 +5,30 @@ from . import models, serializers
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
-class ListAllBoards(APIView):
+class ListAllEvents(APIView):
     def get(self, request, format=None):
 
-        boards = models.Board.objects.all()
+        events = models.Board.objects.all()
 
-        paginator = Paginator(boards, 20)
+        paginator = Paginator(events, 20)
 
         page = request.GET.get('page')
 
         try:
-            boards = paginator.page(page)
+            events = paginator.page(page)
         except PageNotAnInteger:
         
-            boards = paginator.page(1)
+            events = paginator.page(1)
         except EmptyPage:
-            boards = paginator.page(paginator.num_pages)
+            events = paginator.page(paginator.num_pages)
 
 
-        serializer = serializers.BoardSerializer(boards, many=True)
+        serializer = serializers.EventSerializer(events, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
         #queryset = models.Board.objects.all()
-        #serializer_class = serializers.BoardSerializer
+        #serializer_class = serializers.EventSerializer
 
         #filter_backends = (filters.SearchFilter,django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter,)
         #search_fields = ('job_name', 'company')
@@ -36,7 +36,7 @@ class ListAllBoards(APIView):
         #ordering_fields = ('job_name','company')
         #ordering = ('job_name')
 
-        #pagination_class = serializers.PaginatedBoardSerializer
+        #pagination_class = serializers.PaginatedEventSerializer
 
 
         #return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -45,7 +45,7 @@ class ListAllBoards(APIView):
 
         user = request.user
 
-        serializer = serializers.InputBoardSerializer(data=request.data)
+        serializer = serializers.InputEventSerializer(data=request.data)
 
         gift_id = request.data['gift_id']
 
@@ -78,9 +78,9 @@ class ListAllComments(APIView):
 class ListAllBoardLikes(APIView):
     def get(self, request, format=None):
 
-        all_board_likes = models.BoardLike.objects.all()
+        all_event_like = models.BoardLike.objects.all()
 
-        serializer = serializers.BoardLikeSerializer(all_board_likes, many=True)
+        serializer = serializers.BoardLikeSerializer(all_event_like, many=True)
 
         return Response(data=serializer.data)
 
@@ -195,6 +195,6 @@ class BoardDetailView(APIView):
         except models.Board.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        serializer = serializers.BoardSerializer(found_board)
+        serializer = serializers.EventSerializer(found_board)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)

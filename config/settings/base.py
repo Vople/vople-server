@@ -73,6 +73,10 @@ THIRD_PARTY_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
+
+
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]
 LOCAL_APPS = [
     'vople.users.apps.UsersAppConfig',

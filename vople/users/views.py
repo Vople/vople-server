@@ -5,6 +5,8 @@ from django.urls import reverse
 from rest_framework import status
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 from rest_framework.response import Response
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
 from . import models
 
 User = get_user_model()
@@ -87,3 +89,7 @@ class UnFollowUser(APIView):
         user.save()
 
         return Response(status=status.HTTP_200_OK)
+
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter

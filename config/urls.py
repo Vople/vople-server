@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from rest_framework_jwt.views import obtain_jwt_token
 from django.conf.urls import url
-from vople.users import serializers
+from vople.users import user_views
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
@@ -18,7 +18,7 @@ urlpatterns = [
 
 
     url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    #url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
 
     # User management
     path(
@@ -30,7 +30,7 @@ urlpatterns = [
         include("vople.sounds.urls", namespace="sounds"),
     ),
     path("accounts/", include("allauth.urls")),
-    url(r'^rest-auth/registration/name-registration/$', serializers.CustomRegistrationView.as_view(), name="rest_custom_register"),
+    url(r'^rest-auth/registration/name-registration/$', user_views.CustomRegistrationView.as_view(), name="rest_custom_register"),
     # Your stuff: custom urls includes go here
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT

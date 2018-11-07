@@ -21,7 +21,7 @@ class CustomRegistrationSerializer(RegisterSerializer):
 
     name = serializers.CharField(required=True)
     bio = serializers.CharField(required=False)
-    gender = CharField(required=True)
+    gender = serializers.CharField(required=True)
 
     def custom_signup(self, request, user):
         user.name = self.validated_data.get('name','')

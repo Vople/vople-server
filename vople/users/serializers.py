@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
-from rest_auth.registration.views import RegisterView
+
 
 from . import models
 

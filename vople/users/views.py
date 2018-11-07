@@ -6,11 +6,15 @@ from rest_framework import status
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 from rest_framework.response import Response
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from rest_auth.registration.views import SocialLoginView
+from rest_auth.registration.views import SocialLoginView, RegisterView
 from . import models
+from . import serializers
 
 User = get_user_model()
 
+
+class CustomRegistrationView(RegisterView):
+    serializer_class = serializers.CustomRegistrationSerializer
 
 class UserDetailView(LoginRequiredMixin, DetailView):
 

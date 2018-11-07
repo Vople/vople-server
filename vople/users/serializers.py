@@ -19,9 +19,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CustomRegistrationSerializer(RegisterSerializer):
 
-    name = serializers.CharField(max_lenth="20", required=True)
+    name = serializers.CharField(required=True)
     bio = serializers.TextField(required=False)
-    gender = CharField(max_length=80, null=True)
+    gender = CharField(required=True)
 
     def custom_signup(self, request, user):
         user.name = self.validated_data.get('name','')
@@ -29,6 +29,3 @@ class CustomRegistrationSerializer(RegisterSerializer):
         user.gender = self.validated_data.get('gender', '')
         user.save(update_fields=['name', 'bio', 'gender'])
 
-
-class CustomRegistrationView(RegisterView):
-    serializer_class = CustomRegistrationSerializer

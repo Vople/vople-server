@@ -265,3 +265,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': False
 }
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'vople.users.serializers.CustomRegisterSerializer',
+}

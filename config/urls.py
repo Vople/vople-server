@@ -30,7 +30,7 @@ urlpatterns = [
         include("vople.sounds.urls", namespace="sounds"),
     ),
     path("accounts/", include("allauth.urls")),
-    url(r'^rest-auth/registration/name-registration/$', views.CustomRegistrationView.as_view(), name="rest_custom_register"),
+    url(r'^rest-auth/registration/vople-registration/$', views.CustomRegistrationView.as_view(), name="rest_custom_register"),
     # Your stuff: custom urls includes go here
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT

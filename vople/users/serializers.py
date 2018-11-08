@@ -33,7 +33,7 @@ class ListUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        field = (
+        fields = (
             'id',
             'name',
         )

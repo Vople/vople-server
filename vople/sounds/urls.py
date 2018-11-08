@@ -14,6 +14,11 @@ urlpatterns = [
         view=views.ListAllComments.as_view(),
         name='all_comments',
     ),
+    url (
+        regex=r'^(?P<board_id>[0-9]+)/comments/$',
+        view=views.ListCommentsOnBoard.as_view(),
+        name='all_comments',
+    ),
 
     url (
         regex=r'^comment_likes/$',

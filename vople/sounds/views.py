@@ -53,6 +53,16 @@ class ListAllBoards(APIView):
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ListAllComments(APIView):
+    def get(self, request, format=None):
+
+        all_comments = models.Comment.objects.all()
+
+        serializer = serializers.CommentSerializer(all_comments, many=True)
+
+        return Response(data=serializer.data)
+
+
 class ListCommentsOnBoard(APIView):
     def get(self, request, board_id, format=None):
 

@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 class ListAllBoards(APIView):
+
     def get(self, request, format=None):
 
         boards = models.Board.objects.all()
@@ -54,8 +55,8 @@ class ListAllBoards(APIView):
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class ListAllComments(APIView):
+
     def get(self, request, format=None):
 
         all_comments = models.Comment.objects.all()
@@ -64,8 +65,8 @@ class ListAllComments(APIView):
 
         return Response(data=serializer.data)
 
-
 class ListCommentsOnBoard(APIView):
+
     def get(self, request, board_id, format=None):
 
         try:
@@ -80,6 +81,7 @@ class ListCommentsOnBoard(APIView):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 class ListAllBoardLikes(APIView):
+
     def get(self, request, format=None):
 
         all_board_likes = models.BoardLike.objects.all()
@@ -89,6 +91,7 @@ class ListAllBoardLikes(APIView):
         return Response(data=serializer.data)
 
 class ListAllCommentLikes(APIView):
+
     def get(self, request, format=None):
 
         all_comment_likes = models.CommentLike.objects.all()
@@ -98,6 +101,7 @@ class ListAllCommentLikes(APIView):
         return Response(data=serializer.data)
 
 class ListAllPresents(APIView):
+    
     def get(self, request, format=None):
 
         all_presents = models.Present.objects.all()
@@ -135,7 +139,6 @@ class LikeBoard(APIView):
             new_like.save()
 
             return Response(status=status.HTTP_201_CREATED)
-
 
 class LikeComment(APIView):
 
@@ -179,6 +182,7 @@ class LikeComment(APIView):
             return Response(status=status.HTTP_201_CREATED)
 
 class CommentOnBoard(APIView):
+
     def post(self, request, board_id, format=None):
 
         user = request.user
@@ -196,12 +200,11 @@ class CommentOnBoard(APIView):
                 board = found_board
             )
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-
         else:
-            
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class BoardDetailView(APIView):
+
     def get(self, request, board_id, format=None):
 
         user = request.user

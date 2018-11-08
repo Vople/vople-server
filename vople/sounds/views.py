@@ -53,10 +53,15 @@ class ListAllBoards(APIView):
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ListAllComments(APIView):
-    def get(self, request, format=None):
+class ListCommentsOnBoard(APIView):
+    def get(self, request, board_id, format=None):
 
-        all_comments = models.Comment.objects.all()
+        try:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        all_comments = found_board.comments
 
         serializer = serializers.CommentSerializer(all_comments, many=True)
 

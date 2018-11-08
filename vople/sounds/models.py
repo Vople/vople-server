@@ -39,6 +39,7 @@ class Comment(TimeStampedModel):
     def __str__(self):
         return self.board.title
 
+
 class BoardLike(Like):
     board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
 

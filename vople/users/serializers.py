@@ -29,3 +29,11 @@ class CustomRegistrationSerializer(RegisterSerializer):
         user.gender = self.validated_data.get('gender', '')
         user.save(update_fields=['name', 'bio', 'gender'])
 
+class ListUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.User
+        field = (
+            'id',
+            'name',
+        )

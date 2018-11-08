@@ -1,6 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from vople.users import serializers as user_serializer
+from vople.users import models as user_model
 from . import models, serializers
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -75,7 +77,7 @@ class ListCommentsOnBoard(APIView):
 
         serializer = serializers.CommentSerializer(all_comments, many=True)
 
-        return Response(data=serializer.data)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 class ListAllBoardLikes(APIView):
     def get(self, request, format=None):
@@ -136,6 +138,18 @@ class LikeBoard(APIView):
 
 
 class LikeComment(APIView):
+
+    def get(self, request, comment_id, format=None):
+        likes = models.CommentLike.objects.filter(comment__id = comment_id)
+
+        likes_id = likes.values('owner_id')
+
+        users = user_model.User.objects.filter(id__in=likes_id)
+
+        serializer = user_serializer.ListUserSerializer(users, many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
     def post(self, request, comment_id, format=None):
 
         user = request.user

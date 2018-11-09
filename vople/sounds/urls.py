@@ -57,6 +57,11 @@ urlpatterns = [
     url(
         regex=r'^(?P<board_id>[0-9]+)/board/',
         view=views.BoardDetailView.as_view(),
-        name='board_detail'
+        name='board_detail',
+    ),
+    url(
+        regex=r'^scripts/$',
+        view=views.ScriptViewSet.as_view(),
+        name='script',
     ),
 ]

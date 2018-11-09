@@ -217,3 +217,40 @@ class BoardDetailView(APIView):
         serializer = serializers.BoardSerializer(found_board)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+class ScriptViewSet(APIView):
+
+    def get(self, request, format=None):
+        
+        scripts = models.Script.objects.all()
+
+        serializer = serializers.ScriptSerializer(scripts, many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)        
+
+    def post(self, request, format=None):
+        
+        user = request.user
+
+        member_restriction = request.data.get('member_restriction', -1)
+
+        plots = request.data.get('plots')
+
+        if(member_restriction <= 0 or len(plots) <= 0 or member_restriction != len(plots)):
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        new_script = models.Script.objects.create(
+            owner=user,
+            member_restriction=member_restriction,
+        )
+
+        new_script.save()
+
+        for i in range(0, member_restriction):
+            plot = models.Plot.objects.create(
+                content=plots[i],
+                script=new_script,
+            )
+            plot.save()
+
+        return Response(status=status.HTTP_201_CREATED)

@@ -86,3 +86,24 @@ class InputBoardSerializer(serializers.ModelSerializer):
             'content',
             'due_date',
         )
+
+class PlotSerializer(serializer.ModelSerializer):
+
+    class Meta:
+        model = models.Plot
+        fields = (
+            'id',
+            'content',
+        )
+
+class ScriptSerializer(serializers.ModelSerializer):
+
+    plots = PlotSerializer(many=True)
+
+    class Meta:
+        model = models.Script
+        fields = (
+            'owner',
+            'member_restriction',
+            'plots',
+        )

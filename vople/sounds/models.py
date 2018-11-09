@@ -52,3 +52,12 @@ class CommentLike(Like):
 
     def __str__(self):
         return self.owner.username + ": " + self.comment.board.title
+
+class Script(TimeStampedModel):
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
+    member_restriction = models.ImtegerField(default=0, null=False)
+    is_accept = models.BooleanField(default=False)
+
+class Plot(TimeStampedModel):
+    content = models.TextField(null=False)
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")

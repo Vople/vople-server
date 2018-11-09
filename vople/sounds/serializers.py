@@ -87,7 +87,7 @@ class InputBoardSerializer(serializers.ModelSerializer):
             'due_date',
         )
 
-class PlotSerializer(serializer.ModelSerializer):
+class PlotSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Plot

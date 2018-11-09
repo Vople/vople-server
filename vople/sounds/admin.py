@@ -22,3 +22,11 @@ class CommentAdmin(admin.ModelAdmin):
 @admin.register(models.Present)
 class PresentAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(models.Plot)
+class PlotAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(models.Script)
+class ScriptAdmin(admin.ModelAdmin):
+    pass

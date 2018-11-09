@@ -257,3 +257,15 @@ class ScriptViewSet(APIView):
             plot.save()
 
         return Response(status=status.HTTP_201_CREATED)
+
+class GetScriptView(APIView):
+    def get(self, request, script_id, format=None):
+
+        try:
+            found_script = models.Script.objects.get(id=script_id)
+        except models.Script.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = serializers.ScriptSerializer(found_script)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)

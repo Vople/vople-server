@@ -103,6 +103,7 @@ class ScriptSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Script
         fields = (
+            'id',
             'owner',
             'member_restriction',
             'plots',

@@ -106,4 +106,5 @@ class ScriptSerializer(serializers.ModelSerializer):
             'owner',
             'member_restriction',
             'plots',
+            'title',
         )

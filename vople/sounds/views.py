@@ -242,6 +242,7 @@ class ScriptViewSet(APIView):
         new_script = models.Script.objects.create(
             owner=user,
             member_restriction=member_restriction,
+            accept=False,
         )
 
         new_script.save()

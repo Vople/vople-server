@@ -60,17 +60,11 @@ class Script(TimeStampedModel):
     title = models.CharField(max_length=100, null=True, default="__REMOVE__")
 
     def __str__(self):
-        if(self.title == null):
-            return self.owner
-        else:
-            return self.title
+        return self.title
 
 class Plot(TimeStampedModel):
     content = models.TextField(null=False)
     script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")
 
     def __str__(self):
-        if(self.title == null):
-            return self.content
-        else:
-            return self.script.title + " : " + self.content
+        return self.script.title + " : " + self.content

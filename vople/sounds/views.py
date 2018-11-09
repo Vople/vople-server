@@ -248,7 +248,7 @@ class ScriptViewSet(APIView):
 
         for i in range(0, member_restriction):
             plot = models.Plot.objects.create(
-                content=plots[i],
+                content=plots.get('plots' + str(i)),
                 script=new_script,
             )
             plot.save()

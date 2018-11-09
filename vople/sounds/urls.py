@@ -65,7 +65,7 @@ urlpatterns = [
         name='script',
     ),
     url(
-        regex=r'^(?P<script_id>[0-9]+/script/',
+        regex=r'^(?P<script_id>[0-9]+)/script/',
         view=views.GetScriptView.as_view(),
         name='get_script',
     ),

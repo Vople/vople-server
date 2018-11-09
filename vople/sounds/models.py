@@ -57,7 +57,14 @@ class Script(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
     member_restriction = models.IntegerField(default=0, null=False)
     is_accept = models.BooleanField(default=False)
+    title = models.CharField(max_length=100, null=True, default="__REMOVE__")
+
+    def __str__(self):
+        return self.title
 
 class Plot(TimeStampedModel):
     content = models.TextField(null=False)
     script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")
+
+    def __str__(self):
+        return self.script.title + " : " + self.content

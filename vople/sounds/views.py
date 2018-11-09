@@ -222,7 +222,7 @@ class ScriptViewSet(APIView):
 
     def get(self, request, format=None):
         
-        scripts = models.Script.objects.all()
+        scripts = models.Script.objects.filter()
 
         serializer = serializers.ScriptSerializer(scripts, many=True)
 
@@ -234,6 +234,8 @@ class ScriptViewSet(APIView):
 
         member_restriction = request.data.get('member_restriction', -1)
 
+        title = request.data.get('title', '')
+
         plots = request.data.get('plots')
 
         if(member_restriction <= 0 or len(plots) <= 0 or member_restriction != len(plots)):
@@ -242,6 +244,7 @@ class ScriptViewSet(APIView):
         new_script = models.Script.objects.create(
             owner=user,
             member_restriction=member_restriction,
+            title=title,
         )
 
         new_script.save()

@@ -55,7 +55,7 @@ class CommentLike(Like):
 
 class Script(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
-    member_restriction = models.ImtegerField(default=0, null=False)
+    member_restriction = models.IntegerField(default=0, null=False)
     is_accept = models.BooleanField(default=False)
 
 class Plot(TimeStampedModel):

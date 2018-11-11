@@ -88,7 +88,7 @@ class JoinBoardViewSet(APIView):
         if member_restriction <= current_members:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
-        edible_rolls = []
+        edible_rolls = [3]
 
         for plot in found_board.script.plots.all():
             if plot.is_adjust == False:

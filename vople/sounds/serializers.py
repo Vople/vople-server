@@ -113,3 +113,6 @@ class ScriptSerializer(serializers.ModelSerializer):
 class EdibleRollNumberSerializer(serializers.ModelSerializer):
 
     rolls = serializers.ListField(child=serializers.IntegerField(min_value=1, max_value=100))
+
+    class Meta:
+        pass

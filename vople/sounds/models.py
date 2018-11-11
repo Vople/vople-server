@@ -32,7 +32,7 @@ class Like(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
 
 class Board(TimeStampedModel):
-    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False, related_name="my_boards")
     present = models.ForeignKey(Present, on_delete=models.DO_NOTHING, null=True)
     title = models.CharField(max_length=100, null=False)
     content = models.TextField(null=False, default="_REMOVE_")

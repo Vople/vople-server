@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='board',
             name='joined_member',
-            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, null=True, blank=True),
+            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, blank=True),
         ),
         migrations.AddField(
             model_name='plot',

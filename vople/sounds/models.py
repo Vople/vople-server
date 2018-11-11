@@ -9,6 +9,24 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
+
+class Script(TimeStampedModel):
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
+    member_restriction = models.IntegerField(default=0, null=False)
+    is_accept = models.BooleanField(default=False)
+    title = models.CharField(max_length=100, null=True, default="__REMOVE__")
+
+    def __str__(self):
+        return self.title
+
+class Plot(TimeStampedModel):
+    content = models.TextField(null=False)
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")
+    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_plots")
+
+    def __str__(self):
+        return self.script.title + " : " + self.content
+
 class Present(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     name = models.CharField(max_length=50, null=False)
@@ -26,6 +44,9 @@ class Board(TimeStampedModel):
     title = models.CharField(max_length=100, null=False)
     content = models.TextField(null=False, default="_REMOVE_")
     due_date = models.DateTimeField(null=True)
+    joined_member = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_boards")
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=True, related_name="scripts")
+    mode = models.IntegerField(default=0, null=False)
 
     def __str__(self):
         return self.title
@@ -52,19 +73,3 @@ class CommentLike(Like):
 
     def __str__(self):
         return self.owner.username + ": " + self.comment.board.title
-
-class Script(TimeStampedModel):
-    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
-    member_restriction = models.IntegerField(default=0, null=False)
-    is_accept = models.BooleanField(default=False)
-    title = models.CharField(max_length=100, null=True, default="__REMOVE__")
-
-    def __str__(self):
-        return self.title
-
-class Plot(TimeStampedModel):
-    content = models.TextField(null=False)
-    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")
-
-    def __str__(self):
-        return self.script.title + " : " + self.content

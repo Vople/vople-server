@@ -1,3 +1,9 @@
+from django.db import migrations, models
+from vople.users.models import User
+from django.conf import settings
+import django.db.models.deletion
+
+
 class Migration(migrations.Migration):
 
     dependencies = [

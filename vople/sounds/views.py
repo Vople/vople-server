@@ -75,7 +75,11 @@ class JoinBoardViewSet(APIView):
         
         serializer = serializers.EdibleRollNumberSerializer(data=[1,3,5])
 
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+        if serializer.is_valid():
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
 
 
     def post(self, request, board_id, format=None):

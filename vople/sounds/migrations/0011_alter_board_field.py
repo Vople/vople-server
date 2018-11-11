@@ -13,9 +13,13 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-        model_name='Board',
-        name='joined_member',
-        field=models.ManyToManyField(null=True, to=settings.AUTH_USER_MODEL),
-    ),
+        migrations.RemoveField(
+            model_name='board',
+            name='joined_member',
+        ),
+        migrations.AddField(
+            model_name='board',
+            name='joined_member',
+            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, null=True),
+        ),
     ]

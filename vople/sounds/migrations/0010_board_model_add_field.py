@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 from vople.users.models import User
+from django.conf import settings
 import django.db.models.deletion
 
 
@@ -15,12 +16,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='board',
             name='joined_member',
-            field=models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_boards"),
+            field=models.ForeignKey(on_delete=models.DO_NOTHING, null=True, related_name="my_boards", to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='board',
             name='script',
-            field=models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=True, related_name="scripts"),
+            field=models.ForeignKey(on_delete=models.DO_NOTHING, null=True, related_name="scripts", to='sounds.Script'),
         ),
         migrations.AddField(
             model_name='board',
@@ -30,6 +31,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='plot',
             name='member',
-            field=models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_plots"),
+            field=models.ForeignKey(on_delete=models.DO_NOTHING, null=True, related_name="my_plots", to=settings.AUTH_USER_MODEL),
         ),
     ]

@@ -30,7 +30,7 @@ class ListAllBoards(APIView):
             boards = paginator.page(paginator.num_pages)
 
 
-        serializer = serializers.BoardSerializer(boards, many=True)
+        serializer = serializers.BoardBreifSerializer(boards, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 

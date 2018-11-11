@@ -69,6 +69,18 @@ class BoardSerializer(serializers.ModelSerializer):
             'board_likes',
         )
 
+class BoardBreifSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = model.Board
+        fields = (
+            'id',
+            'title',
+            'mode',
+            'script',
+            'board_likes',
+        )
+
 class InputSoundSerializer(serializers.ModelSerializer):
 
     class Meta:

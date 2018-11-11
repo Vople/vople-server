@@ -98,6 +98,9 @@ class JoinBoardViewSet(APIView):
                 if plot.roll_name not in edible_rolls:
                     edible_rolls.append(plot.roll_name)
 
+        if len(edible_rolls) <= 0 :
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
         rolls = {"rolls" : edible_rolls}
 
         serializer = serializers.EdibleRollNumberSerializer(data=rolls)

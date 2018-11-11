@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0003_auto_20181107_1602'),
+        ('users', '0002_auto_20181031_1602'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='user',
             name='followers',
-            field=models.ManyToManyField('self', blank=True, null=True),
+            field=models.ManyToManyField('self', blank=True),
         ),
         migrations.AddField(
             model_name='user',
             name='following',
-            field=models.ManyToManyField('self', blank=True, null=True),
+            field=models.ManyToManyField('self', blank=True),
         ),
     ]

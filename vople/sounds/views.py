@@ -81,6 +81,9 @@ class JoinBoardViewSet(APIView):
         except models.Board.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+        if found_board.mode == BOARD_FREE_MODE:
+            return Response(status=status.HTTP_200_OK)
+
         member_restriction = found_board.script.member_restriction
 
         current_members = found_board.joined_member.all().count()
@@ -88,14 +91,16 @@ class JoinBoardViewSet(APIView):
         if member_restriction <= current_members:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
-        edible_rolls = [3]
+        edible_rolls = []
 
         for plot in found_board.script.plots.all():
             if plot.is_adjust == False:
                 if plot.roll_name not in edible_rolls:
                     edible_rolls.append(plot.roll_name)
 
-        serializer = serializers.EdibleRollNumberSerializer(data={"rolls":edible_rolls})
+        rolls = {"rolls" : edible_rolls}
+
+        serializer = serializers.EdibleRollNumberSerializer(data=rolls)
 
         if serializer.is_valid():
             return Response(data=serializer.data, status=status.HTTP_200_OK)

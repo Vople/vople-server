@@ -6,6 +6,9 @@ from vople.users import models as user_model
 from . import models, serializers
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+BOARD_FREE_MODE = 0
+BOARD_ROLE_MODE = 1
+
 # Create your views here.
 class ListAllBoards(APIView):
 
@@ -39,21 +42,57 @@ class ListAllBoards(APIView):
 
         present_id = request.data['present_id']
 
+        mode = request.data['mode']
+
+        script_id = request.data['script_id']
+
         try:
             found_present = models.Present.objects.get(id=present_id)
         except models.Present.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            found_script = models.Script.objects.get(id=script_id)
+        except models.Script.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         if serializer.is_valid():
             serializer.save(
                 owner = user,
                 present = found_present,
+                mode=mode,
+                script=found_script,
                 )
 
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class JoinBoardViewSet(APIView):
+
+    def get(self, request, board_id, format=None):
+        
+        serializer = serializers.EdibleRollNumberSerializer(data=[1,3,5])
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+    def post(self, request, board_id, format=None):
+        
+        user = request.user
+
+        try:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        member_restriction = found_board.script.member_restriction
+
+        current_members = found_board.joined_member.all().count()
+
+        return Response(status=status.HTTP_200_OK)
+
 
 class ListAllComments(APIView):
 

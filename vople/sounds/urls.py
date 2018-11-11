@@ -9,6 +9,12 @@ urlpatterns = [
         name='boards',
     ),
 
+    url(
+        regex=r'^(?P<board_id>[0-9]+)/join/$',
+        view=views.JoinBoardViewSet.as_view(),
+        name='join_board',
+    ),
+
     url (
         regex=r'^comments/$',
         view=views.ListAllComments.as_view(),

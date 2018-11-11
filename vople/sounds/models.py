@@ -19,13 +19,6 @@ class Script(TimeStampedModel):
     def __str__(self):
         return self.title
 
-class Plot(TimeStampedModel):
-    content = models.TextField(null=False)
-    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")
-    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_plots")
-
-    def __str__(self):
-        return self.script.title + " : " + self.content
 
 class Present(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
@@ -44,12 +37,13 @@ class Board(TimeStampedModel):
     title = models.CharField(max_length=100, null=False)
     content = models.TextField(null=False, default="_REMOVE_")
     due_date = models.DateTimeField(null=True)
-    joined_member = models.ManyToManyField(User, null=True, related_name="my_boards")
+    joined_member = models.ManyToManyField(User, null=True)
     script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=True, related_name="scripts")
     mode = models.IntegerField(default=0, null=False)
 
     def __str__(self):
         return self.title
+
 
 class Comment(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
@@ -59,6 +53,19 @@ class Comment(TimeStampedModel):
 
     def __str__(self):
         return self.board.title
+
+
+class Plot(TimeStampedModel):
+    content = models.TextField(null=False)
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")
+    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_plots")
+    comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots")
+    is_adjust = models.BooleanField(null=False, default=False)
+    roll_name = models.CharField(null=False, default="Roll_Name", max_length=80)
+    order = models.IntegerField(null=False)
+
+    def __str__(self):
+        return self.script.title + " : " + self.content
 
 
 class BoardLike(Like):

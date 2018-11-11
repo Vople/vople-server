@@ -58,8 +58,8 @@ class Comment(TimeStampedModel):
 class Plot(TimeStampedModel):
     content = models.TextField(null=False)
     script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")
-    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_plots")
-    comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots")
+    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_plots", blank=True)
+    comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots", blank=True)
     is_adjust = models.BooleanField(null=False, default=False)
     roll_name = models.CharField(null=False, default="Roll_Name", max_length=80)
     order = models.IntegerField(null=False, default=0)

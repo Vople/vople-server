@@ -28,6 +28,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='plot',
             name='order',
-            field=models.IntegerField(null=False)
+            field=models.IntegerField(null=False, default=0)
         ),
     ]

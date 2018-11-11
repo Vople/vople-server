@@ -62,7 +62,7 @@ class Plot(TimeStampedModel):
     comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots")
     is_adjust = models.BooleanField(null=False, default=False)
     roll_name = models.CharField(null=False, default="Roll_Name", max_length=80)
-    order = models.IntegerField(null=False)
+    order = models.IntegerField(null=False, default=0)
 
     def __str__(self):
         return self.script.title + " : " + self.content

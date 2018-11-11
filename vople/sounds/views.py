@@ -118,7 +118,29 @@ class JoinBoardViewSet(APIView):
         
         user = request.user
 
-        
+        roll_name = request.data['roll_name']
+
+        try:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if found_board.mode == BOARD_FREE_MODE:
+            return Response(status=status.HTTP_200_OK)
+
+        found_plots = []
+
+        for plot in found_board.script.plots.all():
+            if plot.roll_name == roll_name:
+                found_plots.append(plot)
+
+        if len(found_plots) <= 0 :
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        for plot in found_plots:
+            plot.is_adjust = True
+            plot.member = user
+            plot.save()
 
         return Response(status=status.HTTP_200_OK)
 

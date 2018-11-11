@@ -72,7 +72,7 @@ class BoardSerializer(serializers.ModelSerializer):
 class BoardBreifSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = model.Board
+        model = models.Board
         fields = (
             'id',
             'title',

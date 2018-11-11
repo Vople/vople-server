@@ -5,6 +5,7 @@ from vople.users import serializers as user_serializer
 from vople.users import models as user_model
 from . import models, serializers
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 
 BOARD_FREE_MODE = 0
 BOARD_ROLE_MODE = 1
@@ -72,8 +73,10 @@ class ListAllBoards(APIView):
 class JoinBoardViewSet(APIView):
 
     def get(self, request, board_id, format=None):
-        
-        serializer = serializers.EdibleRollNumberSerializer(data=[1,3,5])
+
+        rolls = {"rolls":[1,3,5]}
+
+        serializer = serializers.EdibleRollNumberSerializer(data=rolls)
 
         if serializer.is_valid():
             return Response(data=serializer.data, status=status.HTTP_200_OK)

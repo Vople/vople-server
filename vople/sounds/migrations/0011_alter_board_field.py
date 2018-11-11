@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
         model_name='Board',
         name='joined_member',
-        field=models.ManyToManyField(on_delete=models.DO_NOTHING, null=True, to=settings.AUTH_USER_MODEL),
+        field=models.ManyToManyField(null=True, to=settings.AUTH_USER_MODEL),
     ),
     ]

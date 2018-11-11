@@ -93,7 +93,7 @@ class JoinBoardViewSet(APIView):
         for plot in found_board.script.plots.all():
             if plot.is_adjust == False:
                 if plot.roll_name not in edible_rolls:
-                    editble_rolls.append(plot.roll_name)
+                    edible_rolls.append(plot.roll_name)
 
         serializer = serializers.EdibleRollNumberSerializer(data={"rolls":edible_rolls})
 

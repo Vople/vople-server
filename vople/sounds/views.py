@@ -90,7 +90,7 @@ class JoinBoardViewSet(APIView):
 
         edible_rolls = []
 
-        for plot in found_board.script.plots:
+        for plot in found_board.script.plots.all():
             if plot.is_adjust == False:
                 if plot.roll_name not in edible_rolls:
                     editble_rolls.append(plot.roll_name)

@@ -76,32 +76,9 @@ class JoinBoardViewSet(APIView):
 
         #rolls = {"rolls":[1,3,5]}
 
-        try:
-            found_board = models.Board.objects.get(id=board_id)
-        except models.Board.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        a = [3,5]
 
-        if found_board.mode == BOARD_FREE_MODE:
-            return Response(status=status.HTTP_200_OK)
-
-        member_restriction = found_board.script.member_restriction
-
-        current_members = found_board.joined_member.all().count()
-
-        if member_restriction <= current_members:
-            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-
-        edible_rolls = []
-
-        for plot in found_board.script.plots.all():
-            if plot.is_adjust == False:
-                if plot.roll_name not in edible_rolls:
-                    edible_rolls.append(plot.roll_name)
-
-        if len(edible_rolls) <= 0 :
-            return Response(status=status.HTTP_204_NO_CONTENT)
-
-        rolls = {"rolls" : edible_rolls}
+        rolls = {"rolls" : a}
 
         serializer = serializers.EdibleRollNumberSerializer(data=rolls)
 
@@ -109,6 +86,41 @@ class JoinBoardViewSet(APIView):
             return Response(data=serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+        # try:
+        #     found_board = models.Board.objects.get(id=board_id)
+        # except models.Board.DoesNotExist:
+        #     return Response(status=status.HTTP_404_NOT_FOUND)
+
+        # if found_board.mode == BOARD_FREE_MODE:
+        #     return Response(status=status.HTTP_200_OK)
+
+        # member_restriction = found_board.script.member_restriction
+
+        # current_members = found_board.joined_member.all().count()
+
+        # if member_restriction <= current_members:
+        #     return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        # edible_rolls = []
+
+        # for plot in found_board.script.plots.all():
+        #     if plot.is_adjust == False:
+        #         if plot.roll_name not in edible_rolls:
+        #             edible_rolls.append(plot.roll_name)
+
+        # if len(edible_rolls) <= 0 :
+        #     return Response(status=status.HTTP_204_NO_CONTENT)
+
+        # rolls = {"rolls" : edible_rolls}
+
+        # serializer = serializers.EdibleRollNumberSerializer(data=rolls)
+
+        # if serializer.is_valid():
+        #     return Response(data=serializer.data, status=status.HTTP_200_OK)
+        # else:
+        #     return Response(status=status.HTTP_400_BAD_REQUEST)
         
 
 

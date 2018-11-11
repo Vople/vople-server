@@ -13,6 +13,31 @@ class PresentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class PlotSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Plot
+        fields = (
+            'id',
+            'content',
+        )
+
+class ScriptSerializer(serializers.ModelSerializer):
+
+    plots = PlotSerializer(many=True)
+
+    class Meta:
+        model = models.Script
+        fields = (
+            'id',
+            'owner',
+            'member_restriction',
+            'plots',
+            'title',
+        )
+
+
+
 
 class CommentLikeSerializer(serializers.ModelSerializer):
 
@@ -71,6 +96,8 @@ class BoardSerializer(serializers.ModelSerializer):
 
 class BoardBreifSerializer(serializers.ModelSerializer):
 
+    script = ScriptSerializer()
+
     class Meta:
         model = models.Board
         fields = (
@@ -97,29 +124,6 @@ class InputBoardSerializer(serializers.ModelSerializer):
             'title',
             'content',
             'due_date',
-        )
-
-class PlotSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = models.Plot
-        fields = (
-            'id',
-            'content',
-        )
-
-class ScriptSerializer(serializers.ModelSerializer):
-
-    plots = PlotSerializer(many=True)
-
-    class Meta:
-        model = models.Script
-        fields = (
-            'id',
-            'owner',
-            'member_restriction',
-            'plots',
-            'title',
         )
 
 class EdibleRollNumberSerializer(serializers.Serializer):

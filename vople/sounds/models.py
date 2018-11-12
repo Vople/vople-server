@@ -68,7 +68,7 @@ class Plot(TimeStampedModel):
     comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots", blank=True)
     order = models.IntegerField(null=False, default=0)
     # Add Field
-    cast = models.ForeignKey(Cast, realted_name="plots_by_cast", null=False, blank=True)
+    cast = models.ForeignKey(Cast, realted_name="plots_by_cast", null=False, blank=True, on_delete=models.DO_NOTHING)
 
 
     def __str__(self):

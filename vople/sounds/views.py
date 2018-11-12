@@ -129,6 +129,9 @@ class JoinBoardViewSet(APIView):
         except models.Cast.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+        if found_cast.is_adjust == True:
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
         found_plots = found_cast.plots.all()
 
         if len(found_plots) <= 0 :

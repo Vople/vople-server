@@ -72,7 +72,10 @@ class Plot(TimeStampedModel):
 
 
     def __str__(self):
-        return self.cast.roll_name + " : " + self.content
+        if cast is not none:
+            return self.cast.roll_name + " : " + self.content
+        else:
+            return self.content
 
 
 class BoardLike(Like):

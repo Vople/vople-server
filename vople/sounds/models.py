@@ -23,7 +23,7 @@ class Cast(TimeStampedModel):
     script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False)
     roll_name = models.CharField(max_length=20, null=False)
     is_adjust = models.BooleanField(default=False)
-    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_casts")
+    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_casts", null=True)
 
     def __str__(self):
         return "[" + self.script.title + "] " + self.roll_name

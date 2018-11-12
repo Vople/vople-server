@@ -132,7 +132,7 @@ class JoinBoardViewSet(APIView):
         if found_cast.is_adjust == True:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
-        found_plots = found_cast.plots.all()
+        found_plots = found_cast.plots_by_cast.all()
 
         if len(found_plots) <= 0 :
             return Response(status=status.HTTP_400_BAD_REQUEST)

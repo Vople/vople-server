@@ -74,8 +74,6 @@ class JoinBoardViewSet(APIView):
 
     def get(self, request, board_id, format=None):
 
-        #rolls = {"rolls":[1,3,5]}
-
         try:
             found_board = models.Board.objects.get(id=board_id)
         except models.Board.DoesNotExist:
@@ -93,12 +91,10 @@ class JoinBoardViewSet(APIView):
 
         edible_rolls = []
 
-        for plot in found_board.script.plots.all():
-            if plot.is_adjust == False:
-                if plot.roll_name not in edible_rolls:
-                    edible_rolls.append(plot.roll_name)
-
-        print("Edible_rolls : ", edible_rolls)
+        for cast in found_board.script.casts.all():
+            if cast.is_adjust == False:
+                if cast.roll_name not in edible_rolls:
+                    edible_rolls.append(cast.roll_name)
 
         if len(edible_rolls) <= 0 :
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -128,19 +124,21 @@ class JoinBoardViewSet(APIView):
         if found_board.mode == BOARD_FREE_MODE:
             return Response(status=status.HTTP_200_OK)
 
-        found_plots = []
+        try:
+            found_cast = found_board.cast.get(roll_name=roll_name)
+        except models.Cast.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        for plot in found_board.script.plots.all():
-            if plot.roll_name == roll_name:
-                found_plots.append(plot)
+        found_plots = found_cast.plots.all()
 
         if len(found_plots) <= 0 :
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        for plot in found_plots:
-            plot.is_adjust = True
-            plot.member = user
-            plot.save()
+        found_cast.is_adjust = True
+
+        found_cast.member = user
+        
+        found_cast.save()
 
         return Response(status=status.HTTP_200_OK)
 

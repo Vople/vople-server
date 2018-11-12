@@ -17,4 +17,9 @@ class Migration(migrations.Migration):
             name='member',
             field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL, related_name="my_casts", null=True),
         ),
+        migrations.AlterField(
+            model_name='cast',
+            name='script',
+            models.ForeignKey(null=False, on_delete=django.db.models.deletion.DO_NOTHING, to='sounds.Script', related_name="casts"),
+        ),
     ]

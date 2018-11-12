@@ -20,7 +20,7 @@ class Script(TimeStampedModel):
         return self.title
 
 class Cast(TimeStampedModel):
-    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False)
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="casts")
     roll_name = models.CharField(max_length=20, null=False)
     is_adjust = models.BooleanField(default=False)
     member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_casts", null=True)

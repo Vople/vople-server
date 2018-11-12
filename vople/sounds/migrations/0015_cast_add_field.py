@@ -46,6 +46,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='plot',
             name='cast',
-            field=models.ForeignKey(to='sounds.Cast', related_name="plots_by_cast", null=False, blank=True, on_delete=django.db.models.deletion.DO_NOTHING),
+            field=models.ForeignKey(to='sounds.Cast', related_name="plots_by_cast", null=True, blank=True, on_delete=django.db.models.deletion.DO_NOTHING),
         ),
     ]

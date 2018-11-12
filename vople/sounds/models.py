@@ -19,6 +19,14 @@ class Script(TimeStampedModel):
     def __str__(self):
         return self.title
 
+class Cast(TimeStampedModel):
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False)
+    roll_name = models.CharField(max_length=20, null=False)
+    is_adjust = models.BooleanField(default=False)
+    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_casts")
+
+    def __str__(self):
+        return "[" + self.script.title + "] " + self.roll_name
 
 class Present(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
@@ -57,15 +65,14 @@ class Comment(TimeStampedModel):
 
 class Plot(TimeStampedModel):
     content = models.TextField(null=False)
-    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="plots")
-    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, related_name="my_plots", blank=True)
     comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots", blank=True)
-    is_adjust = models.BooleanField(null=False, default=False)
-    roll_name = models.CharField(null=False, default="Roll_Name", max_length=80)
     order = models.IntegerField(null=False, default=0)
+    # Add Field
+    cast = models.ForeignKey(Cast, realted_name="plots_by_cast", null=False, blank=True)
+
 
     def __str__(self):
-        return self.script.title + " : " + self.content
+        return self.cast.roll_name + " : " + self.content
 
 
 class BoardLike(Like):

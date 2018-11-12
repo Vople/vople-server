@@ -30,3 +30,7 @@ class PlotAdmin(admin.ModelAdmin):
 @admin.register(models.Script)
 class ScriptAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(models.Cast)
+class CastAdmin(admin.ModelAdmin):
+    pass

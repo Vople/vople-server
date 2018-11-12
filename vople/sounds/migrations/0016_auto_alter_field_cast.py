@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cast',
             name='script',
-            models.ForeignKey(null=False, on_delete=django.db.models.deletion.DO_NOTHING, to='sounds.Script', related_name="casts"),
+            field=models.ForeignKey(null=False, on_delete=django.db.models.deletion.DO_NOTHING, to='sounds.Script', related_name="casts"),
         ),
     ]

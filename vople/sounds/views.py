@@ -125,7 +125,7 @@ class JoinBoardViewSet(APIView):
             return Response(status=status.HTTP_200_OK)
 
         try:
-            found_cast = found_board.casts.get(roll_name=roll_name)
+            found_cast = found_board.script.casts.get(roll_name=roll_name)
         except models.Cast.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 

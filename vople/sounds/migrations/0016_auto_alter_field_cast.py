@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cast',
             name='member',
-            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL, related_name="my_casts", null=True)),
+            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL, related_name="my_casts", null=True),
         ),
     ]

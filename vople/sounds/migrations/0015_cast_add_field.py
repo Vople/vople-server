@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('script', models.ForeignKey(null=False, on_delete=django.db.models.deletion.DO_NOTHING, to='sounds.Script')),
                 ('roll_name', models.CharField(max_length=20, null=False)),
-                ('member', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL, related_name="my_casts", null=True)),
+                ('member', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL, related_name="my_casts")),
                 ('is_adjust', models.BooleanField(default=False)),
             ],
             options={

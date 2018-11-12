@@ -72,7 +72,7 @@ class Plot(TimeStampedModel):
 
 
     def __str__(self):
-        if self.cast is not none:
+        if self.cast is not None:
             return self.cast.roll_name + " : " + self.content
         else:
             return self.content

@@ -274,34 +274,34 @@ class LikeComment(APIView):
 class CommentOnBoard(APIView):
 
     def post(self, request, board_id, format=None):
+        pass
+        # user = request.user
 
-        user = request.user
+        # try:
+        #     found_board = models.Board.objects.get(id=board_id)
+        # except models.Board.DoesNotExist:
+        #     return Response(status=status.HTTP_404_NOT_FOUND)
 
-        try:
-            found_board = models.Board.objects.get(id=board_id)
-        except models.Board.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+        # serializer = serializers.InputSoundSerializer(data=request.data)
 
-        serializer = serializers.InputSoundSerializer(data=request.data)
+        # if found_board.mode = BOARD_FREE_MODE:
+        #     if serializer.is_valid():
+        #         serializer.save(
+        #             owner = user,
+        #             board = found_board
+        #         )
+        #         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        #     else:
+        #         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        if found_board.mode = BOARD_FREE_MODE:
-            if serializer.is_valid():
-                serializer.save(
-                    owner = user,
-                    board = found_board
-                )
-                return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        else :
-            plot_id = request.data['plot_id']
+        # else :
+        #     plot_id = request.data['plot_id']
 
 
         
         
-            found_plot = models.Plot.objects.get(id=plot_id)
-        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        #     found_plot = models.Plot.objects.get(id=plot_id)
+        # return Response(data=serializer.data, status=status.HTTP_201_CREATED)
             
 
 class BoardDetailView(APIView):

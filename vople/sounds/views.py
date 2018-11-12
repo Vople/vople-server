@@ -122,6 +122,8 @@ class JoinBoardViewSet(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         if found_board.mode == BOARD_FREE_MODE:
+            found_board.joined_member.add(user)
+            found_board.save()
             return Response(status=status.HTTP_200_OK)
 
         try:
@@ -142,6 +144,10 @@ class JoinBoardViewSet(APIView):
         found_cast.member = user
         
         found_cast.save()
+
+        found_board.joined_member.add(user)
+
+        found_board.save()
 
         return Response(status=status.HTTP_200_OK)
 

@@ -77,7 +77,6 @@ class CommentSerializer(serializers.ModelSerializer):
 class BoardSerializer(serializers.ModelSerializer):
 
     owner = UserSerializer()
-    present = PresentSerializer()
     comments = CommentSerializer(many=True)
     board_likes = BoardLikeSerializer(many=True)
 

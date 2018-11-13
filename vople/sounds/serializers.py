@@ -86,12 +86,13 @@ class BoardSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'owner',
-            'present',
             'title',
             'content',
             'due_date',
             'comments',
             'board_likes',
+            'script',
+            'joined_member',
         )
 
 class BoardBreifSerializer(serializers.ModelSerializer):

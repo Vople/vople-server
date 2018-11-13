@@ -12,7 +12,7 @@ BOARD_ROLE_MODE = 1
 
 def CheckBoardTerminated(board):
     
-    if board.mode is BOARD_FREE_MODE:
+    if board.mode == BOARD_FREE_MODE:
         return False
 
     script = board.script
@@ -307,7 +307,7 @@ class CommentOnBoard(APIView):
 
         serializer = serializers.InputSoundSerializer(data=request.data)
 
-        if found_board.mode = BOARD_FREE_MODE:
+        if found_board.mode == BOARD_FREE_MODE:
             if serializer.is_valid():
                 serializer.save(
                     owner = user,

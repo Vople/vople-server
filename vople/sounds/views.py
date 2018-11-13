@@ -318,7 +318,7 @@ class CommentOnBoard(APIView):
                 return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         else :
-            plot_id = request.data['plot_id']
+            plot_id = int(request.data['plot_id'])
 
             try:
                 found_plot = models.Plot.objects.get(id=plot_id)

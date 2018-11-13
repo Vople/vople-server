@@ -25,7 +25,12 @@ class PresentAdmin(admin.ModelAdmin):
 
 @admin.register(models.Plot)
 class PlotAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'id',
+        'owner'
+        'sound',
+        'cast',
+    )
 
 @admin.register(models.Script)
 class ScriptAdmin(admin.ModelAdmin):

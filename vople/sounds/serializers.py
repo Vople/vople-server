@@ -1,8 +1,16 @@
 from rest_framework import serializers
 from . import models
 from vople.users.serializers import UserSerializer
+from vople.users import models as user_model
 from rest_framework import pagination
 
+class UserBriefSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = user_model.User
+        fields = (
+            'name',
+        )
 
 class PresentSerializer(serializers.ModelSerializer):
     
@@ -61,7 +69,7 @@ class BoardLikeSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
 
     comment_likes = CommentLikeSerializer(many=True)
-    owner = UserSerializer()
+    owner = UserBriefSerializer()
 
     class Meta:
         model = models.Comment
@@ -76,7 +84,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class BoardSerializer(serializers.ModelSerializer):
 
-    owner = UserSerializer()
+    owner = UserBriefSerializer()
     comments = CommentSerializer(many=True)
     board_likes = BoardLikeSerializer(many=True)
 

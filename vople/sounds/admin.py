@@ -63,12 +63,6 @@ class ScriptAdmin(admin.ModelAdmin):
         'scripts',
     )
 
-script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="casts")
-    roll_name = models.CharField(max_length=20)
-    is_adjust = models.BooleanField(default=False)
-    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_casts", null=True)
-
-
 @admin.register(models.Cast)
 class CastAdmin(admin.ModelAdmin):
     list_display = (

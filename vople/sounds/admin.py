@@ -28,7 +28,7 @@ class PlotAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'order',
-        'sound',
+        'comment',
         'cast',
     )
 

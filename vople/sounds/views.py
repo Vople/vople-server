@@ -10,6 +10,22 @@ from django.http import JsonResponse
 BOARD_FREE_MODE = 0
 BOARD_ROLE_MODE = 1
 
+def CheckBoardTerminated(board):
+    
+    if board.mode == BOARD_FREE_MODE:
+        return False
+
+    script = board.script
+
+    plots = script.plots_by_cast.all()
+
+    null_count = plot.filter(comment__isnull=True).count()
+
+    if null_count > 0:
+        return False
+    else if null_count == 0:
+        return True
+
 # Create your views here.
 class ListAllBoards(APIView):
 
@@ -281,34 +297,52 @@ class LikeComment(APIView):
 class CommentOnBoard(APIView):
 
     def post(self, request, board_id, format=None):
-        pass
-        # user = request.user
 
-        # try:
-        #     found_board = models.Board.objects.get(id=board_id)
-        # except models.Board.DoesNotExist:
-        #     return Response(status=status.HTTP_404_NOT_FOUND)
+        user = request.user
 
-        # serializer = serializers.InputSoundSerializer(data=request.data)
+        try:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
-        # if found_board.mode = BOARD_FREE_MODE:
-        #     if serializer.is_valid():
-        #         serializer.save(
-        #             owner = user,
-        #             board = found_board
-        #         )
-        #         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-        #     else:
-        #         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = serializers.InputSoundSerializer(data=request.data)
 
-        # else :
-        #     plot_id = request.data['plot_id']
+        if found_board.mode = BOARD_FREE_MODE:
+            if serializer.is_valid():
+                serializer.save(
+                    owner = user,
+                    board = found_board
+                )
+                return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+        else :
+            plot_id = request.data['plot_id']
 
+            try:
+                found_plot = models.Plot.objects.get(id=plot_id)
+            except models.Plot.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+            if serializer.is_valid():
+                new_comment = serializer.save(
+                    owner = user,
+                    board = found_board
+                )
+            else:
+                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            found_plot.comment = new_comment
         
+            found_plot.save()
+
+            # if(CheckBoardTerminated(found_board)):
+            #     # FCM to Manager
+            # else:
+                
         
-        #     found_plot = models.Plot.objects.get(id=plot_id)
-        # return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
             
 
 class BoardDetailView(APIView):
@@ -330,7 +364,7 @@ class ScriptViewSet(APIView):
 
     def get(self, request, format=None):
         
-        scripts = models.Script.objects.filter()
+        scripts = models.Script.objects.all()
 
         serializer = serializers.ScriptSerializer(scripts, many=True)
 

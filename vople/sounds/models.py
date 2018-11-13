@@ -14,14 +14,14 @@ class Script(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
     member_restriction = models.IntegerField(default=0, null=False)
     is_accept = models.BooleanField(default=False)
-    title = models.CharField(max_length=100, null=True, default="__REMOVE__")
+    title = models.CharField(max_length=100, default="__REMOVE__")
 
     def __str__(self):
         return self.title
 
 class Cast(TimeStampedModel):
-    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=False, related_name="casts")
-    roll_name = models.CharField(max_length=20, null=False)
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="casts")
+    roll_name = models.CharField(max_length=20)
     is_adjust = models.BooleanField(default=False)
     member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_casts", null=True)
 
@@ -30,7 +30,7 @@ class Cast(TimeStampedModel):
 
 class Present(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
-    name = models.CharField(max_length=50, null=False)
+    name = models.CharField(max_length=50)
     price = models.IntegerField(default=0)
 
     def __str__(self):
@@ -42,8 +42,8 @@ class Like(TimeStampedModel):
 class Board(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False, related_name="my_boards")
     present = models.ForeignKey(Present, on_delete=models.DO_NOTHING, null=True)
-    title = models.CharField(max_length=100, null=False)
-    content = models.TextField(null=False, default="_REMOVE_")
+    title = models.CharField(max_length=100)
+    content = models.TextField(default="_REMOVE_")
     due_date = models.DateTimeField(null=True)
     joined_member = models.ManyToManyField(User, blank=True)
     script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=True, related_name="scripts")
@@ -56,7 +56,7 @@ class Board(TimeStampedModel):
 class Comment(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=True, related_name="comments")
-    content = models.TextField(null=True)
+    content = models.TextField(blank=True)
     sound = models.FileField(null=True)
 
     def __str__(self):
@@ -64,9 +64,9 @@ class Comment(TimeStampedModel):
 
 
 class Plot(TimeStampedModel):
-    content = models.TextField(null=False)
+    content = models.TextField()
     comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots", blank=True)
-    order = models.IntegerField(null=False, default=0)
+    order = models.IntegerField(default=0)
     # Add Field
     cast = models.ForeignKey(Cast, related_name="plots_by_cast", null=True, blank=True, on_delete=models.DO_NOTHING)
 

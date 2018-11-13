@@ -12,7 +12,7 @@ BOARD_ROLE_MODE = 1
 
 def CheckBoardTerminated(board):
     
-    if board.mode == BOARD_FREE_MODE:
+    if board.mode is BOARD_FREE_MODE:
         return False
 
     script = board.script

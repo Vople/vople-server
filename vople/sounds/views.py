@@ -23,7 +23,7 @@ def CheckBoardTerminated(board):
 
     if null_count > 0:
         return False
-    else if null_count == 0:
+    else if null_count is 0:
         return True
 
 # Create your views here.

@@ -20,3 +20,4 @@ coreapi==2.3.3  # https://github.com/core-api/python-client
 djangorestframework-jwt==1.11.0
 django-rest-auth==0.9.3
 typing==3.6.6
+django-fcm==0.1.1

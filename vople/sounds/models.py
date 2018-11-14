@@ -1,5 +1,6 @@
 from django.db import models
 from vople.users.models import User
+from fcm.model import AbstractDevice
 
 # Create your models here.
 class TimeStampedModel(models.Model):
@@ -90,3 +91,6 @@ class CommentLike(Like):
 
     def __str__(self):
         return self.owner.username + ": " + self.comment.board.title
+
+class MyDevice(AbstractDevice):
+    user = models.ForeignKey(User, related_name="devices")

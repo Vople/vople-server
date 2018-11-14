@@ -87,7 +87,8 @@ class BoardSerializer(serializers.ModelSerializer):
     owner = UserBriefSerializer()
     comments = CommentSerializer(many=True)
     board_likes = BoardLikeSerializer(many=True)
-
+    script = ScriptSerializer()
+    
     class Meta:
         model = models.Board
         fields = (

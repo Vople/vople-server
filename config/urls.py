@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^rest-auth/', include('rest_auth.urls')),
     #url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
 
-    url(r'^fcm/set_active', sound_view.DeviceViewSet.as_view()),
+    url(r'^fcm/set_active', sound_view.DeviceViewSet.as_view({'post':'put'})),
     url(r'^fcm/', include(router.urls)),
     # User management
     path(

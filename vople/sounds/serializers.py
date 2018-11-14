@@ -28,11 +28,26 @@ class PlotSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'content',
+            'order',
+        )
+
+class CastSerializer(serializers.ModelSerializer):
+
+    plots_by_cast = PlotSerializer(many=True)
+
+    class Meta:
+        model = models.Cast
+        fields = (
+            'id',
+            'roll_name',
+            'plots_by_cast',
+            'member',
+
         )
 
 class ScriptSerializer(serializers.ModelSerializer):
 
-    plots = PlotSerializer(many=True)
+    casts = CastSerializer(many=True)
 
     class Meta:
         model = models.Script
@@ -40,11 +55,9 @@ class ScriptSerializer(serializers.ModelSerializer):
             'id',
             'owner',
             'member_restriction',
-            'plots',
+            'casts',
             'title',
         )
-
-
 
 
 class CommentLikeSerializer(serializers.ModelSerializer):
@@ -88,7 +101,7 @@ class BoardSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True)
     board_likes = BoardLikeSerializer(many=True)
     script = ScriptSerializer()
-    
+
     class Meta:
         model = models.Board
         fields = (

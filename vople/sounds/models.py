@@ -1,6 +1,6 @@
 from django.db import models
 from vople.users.models import User
-from fcm.model import AbstractDevice
+from fcm.models import AbstractDevice
 
 # Create your models here.
 class TimeStampedModel(models.Model):

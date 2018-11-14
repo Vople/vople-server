@@ -65,7 +65,3 @@ class CastAdmin(admin.ModelAdmin):
         'member',
         'id',
     )
-
-@admin.register(models.MyDevice)
-class MyyDeviceAdmin(admin.ModelAdmin):
-    pass

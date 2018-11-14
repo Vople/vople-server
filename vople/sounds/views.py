@@ -26,7 +26,7 @@ def CheckBoardTerminated(board):
     else:
         return True
 
-class DeviceViewSet(APIVoew):
+class DeviceViewSet(APIView):
     def post(self, request, format=None):
 
         device = models.MyDevice.objects.filter(dev_id=request.data['dev_id'])

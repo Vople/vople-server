@@ -9,8 +9,18 @@ from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView, RegisterView
 from . import models
 from . import serializers
+from django.shortcuts import render
+from django.http import HttpResponse
 
 User = get_user_model()
+
+def Index(HttpRequest):
+    name='공유'
+    return HttpResponse('''
+                        <h1> hello, </h1>
+                        <p>{name}</p>
+                        <p>반가워요</p>
+                        '''.format(name=name))
 
 
 class CustomRegistrationView(RegisterView):

@@ -19,10 +19,11 @@ router.register(r'devices', sound_view.DeviceViewSet)
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
 
-
     url(settings.ADMIN_URL, admin.site.urls),
 
     #url(r'^api-token-auth/', obtain_jwt_token),
+
+    url(r'^$',views.Index, name='index'),
 
 
     url(r'^rest-auth/', include('rest_auth.urls')),

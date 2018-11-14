@@ -1,11 +1,9 @@
 from django.conf.urls import url
 from . import views
+from rest_framework import routers
 
 app_name = "sounds"
 
-
-router = routers.DefaultRouter()
-router.register(r'devices', DeviceViewSet)
 
 urlpatterns = [
     url (

@@ -28,8 +28,8 @@ def CheckBoardTerminated(board):
         return True
 
 class DeviceViewSet(viewsets.ModelViewSet):
-    queryset = Device.objects.all()
-    serializer_class = DeviceSerializer
+    queryset = models.MyDevice.objects.all()
+    serializer_class = serializers.DeviceSerializer
 
     def post(self, request, format=None):
 

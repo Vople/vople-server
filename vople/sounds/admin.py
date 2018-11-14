@@ -9,7 +9,6 @@ class BoardAdmin(admin.ModelAdmin):
         'owner',
         'title',
         'content',
-        'joined_member',
         'script',
         'mode',
         'due_date',

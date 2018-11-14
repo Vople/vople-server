@@ -26,7 +26,6 @@ class BoardLikeAdmin(admin.ModelAdmin):
 @admin.register(models.Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = (
-        'comment_plots',
         'owner',
         'board',
         'content',
@@ -54,9 +53,7 @@ class ScriptAdmin(admin.ModelAdmin):
         'member_restriction',
         'is_accept',
         'title',
-        'casts',
         'id',
-        'scripts',
     )
 
 @admin.register(models.Cast)
@@ -66,6 +63,5 @@ class CastAdmin(admin.ModelAdmin):
         'roll_name',
         'is_adjust',
         'member',
-        'plots_by_cast',
         'id',
     )

@@ -15,6 +15,14 @@ class DeviceSerializer(serializers.ModelSerializer):
             'is_active'
             )
 
+class ScriptBriefSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Script
+        fields = (
+            'title',
+        )
+
 class UserBriefSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -152,7 +160,7 @@ class BoardDetailSerializer(serializers.ModelSerializer):
 
 class BoardBreifSerializer(serializers.ModelSerializer):
 
-    script = ScriptSerializer()
+    script = ScriptBriefSerializer()
 
     class Meta:
         model = models.Board

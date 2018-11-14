@@ -93,4 +93,4 @@ class CommentLike(Like):
         return self.owner.username + ": " + self.comment.board.title
 
 class MyDevice(AbstractDevice):
-    user = models.ForeignKey(User, related_name="devices")
+    user = models.ForeignKey(User, related_name="devices", on_delete=models.PROTECT)

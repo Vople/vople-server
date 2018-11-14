@@ -1,2 +1,3 @@
 django-rest-auth==0.9.3
 typing==3.6.6
+django-fcm==0.1.1

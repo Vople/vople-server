@@ -204,7 +204,9 @@ class JoinBoardViewSet(APIView):
 
         found_board.save()
 
-        return Response(status=status.HTTP_200_OK)
+        serializer = serializers.CastSerializer(found_cast)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
 class ListAllComments(APIView):

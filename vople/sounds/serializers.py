@@ -127,6 +127,16 @@ class BoardSerializer(serializers.ModelSerializer):
             'joined_member',
         )
 
+class BoardDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Board
+        fields = (
+            'title',
+            'comments',
+            'script',
+        )
+
 class BoardBreifSerializer(serializers.ModelSerializer):
 
     script = ScriptSerializer()

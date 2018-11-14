@@ -395,7 +395,7 @@ class BoardDetailView(APIView):
         except models.Board.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        serializer = serializers.BoardSerializer(found_board)
+        serializer = serializers.BoardDetailSerializer(found_board)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 

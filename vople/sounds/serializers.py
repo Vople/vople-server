@@ -105,6 +105,17 @@ class CommentSerializer(serializers.ModelSerializer):
             'comment_likes',
         )
 
+class CommentBriefSerializer(serializers.ModelSerializer):
+
+    owner = UserBriefSerializer()
+
+    class Meta:
+        model = models.Comment
+        fields = (
+            'owner',
+            'sound',
+            'created_at',
+        )
 
 class BoardSerializer(serializers.ModelSerializer):
 
@@ -128,6 +139,8 @@ class BoardSerializer(serializers.ModelSerializer):
         )
 
 class BoardDetailSerializer(serializers.ModelSerializer):
+
+    comments = CommentBriefSerializer(many=True)
 
     class Meta:
         model = models.Board

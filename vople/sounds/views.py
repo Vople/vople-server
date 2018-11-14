@@ -26,6 +26,40 @@ def CheckBoardTerminated(board):
     else:
         return True
 
+class DeviceViewSet(APIVoew):
+    def post(self, request, format=None):
+
+        device = MyDevice.objects.filter(dev_id=request.data['dev_id'])
+
+        if device.count()==0 :
+            serializer = DeviceSerializer(data=request.data)
+        else :
+            device=device.first()
+            serializer = DeviceSerializer(device, data=request.data)
+
+        if serializer.is_valid():
+
+            serializer.save(name=request.user.username, user_id=request.user.id,is_active=True)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST);
+
+    def put(self, request, format=None):
+        device = MyDevice.objects.filter(name=request.user.username)
+        
+        if device.count()==0:
+            return Response(status=401)
+
+        device=device.first()
+        if request.data['is_active'] == 'true':
+            device.is_active = True
+        else :
+            device.is_active = False
+
+        device.save()
+
+        return Response(status=200)
+
 # Create your views here.
 class ListAllBoards(APIView):
 

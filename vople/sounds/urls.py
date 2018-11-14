@@ -2,6 +2,11 @@ from django.conf.urls import url
 from . import views
 
 app_name = "sounds"
+
+
+router = routers.DefaultRouter()
+router.register(r'devices', DeviceViewSet)
+
 urlpatterns = [
     url (
         regex=r'^board/$',

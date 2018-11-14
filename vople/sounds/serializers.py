@@ -4,6 +4,17 @@ from vople.users.serializers import UserSerializer
 from vople.users import models as user_model
 from rest_framework import pagination
 
+class DeviceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.MyDevice
+        fields = (
+            'dev_id',
+            'reg_id',
+            'name',
+            'is_active'
+            )
+
 class UserBriefSerializer(serializers.ModelSerializer):
 
     class Meta:

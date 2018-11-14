@@ -86,6 +86,10 @@ LOCAL_APPS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+FCM_APIKEY = "AIzaSyDGN7GyiE8C4gBFnO2bIx-oAhw7-eOnajw"
+FCM_DEVICE_MODEL = 'vople.sounds.MyDevice'
+FCM_MAX_RECIPIENTS = 5
+
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules

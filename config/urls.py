@@ -7,6 +7,14 @@ from django.views import defaults as default_views
 from rest_framework_jwt.views import obtain_jwt_token
 from django.conf.urls import url
 from vople.users import views
+from rest_framework import routers
+from vople.sounds import views as sound_view
+
+
+
+router = routers.DefaultRouter()
+router.register(r'devices', sound_view.DeviceViewSet)
+
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
@@ -20,6 +28,8 @@ urlpatterns = [
     url(r'^rest-auth/', include('rest_auth.urls')),
     #url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
 
+    url(r'^fcm/set_active', sound_view.DeviceViewSet.as_view()),
+    url(r'^fcm/', include(router.urls)),
     # User management
     path(
         "users/",

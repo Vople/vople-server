@@ -46,7 +46,7 @@ class Board(TimeStampedModel):
     content = models.TextField(default="_REMOVE_")
     due_date = models.DateTimeField(null=True)
     joined_member = models.ManyToManyField(User, blank=True)
-    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=True, related_name="scripts")
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=True, related_name="scripts") # scripts->boards
     mode = models.IntegerField(default=0, null=False)
 
     def __str__(self):

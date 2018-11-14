@@ -12,8 +12,6 @@ class BoardAdmin(admin.ModelAdmin):
         'script',
         'mode',
         'due_date',
-        'comments',
-        'board_likes',
         'id',
     )
 
@@ -33,7 +31,6 @@ class CommentAdmin(admin.ModelAdmin):
         'board',
         'content',
         'sound',
-        'comment_likes',
         'id',
     )
 

@@ -145,7 +145,7 @@ class JoinBoardViewSet(APIView):
 
         try:
             _user = found_board.joined_member.all().get(id=user.id)
-        except User.DoesNotExist:
+        except user_model.User.DoesNotExist:
             flag_join_accept = False
 
         # Already Joined

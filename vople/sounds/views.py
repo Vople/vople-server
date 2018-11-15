@@ -96,16 +96,9 @@ class ListAllBoards(APIView):
 
         serializer = serializers.InputBoardSerializer(data=request.data)
 
-        present_id = request.data['present_id']
-
         mode = request.data['mode']
 
         script_id = request.data['script_id']
-
-        try:
-            found_present = models.Present.objects.get(id=present_id)
-        except models.Present.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
 
         try:
             found_script = models.Script.objects.get(id=script_id)
@@ -115,7 +108,6 @@ class ListAllBoards(APIView):
         if serializer.is_valid():
             serializer.save(
                 owner = user,
-                present = found_present,
                 mode=mode,
                 script=found_script,
                 )

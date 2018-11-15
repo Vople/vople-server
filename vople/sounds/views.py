@@ -414,6 +414,7 @@ class CommentOnBoard(APIView):
                     board = found_board
                 )
             else:
+                print(serializer.erros)
                 return Response(data=serializer.errors, status=status.HTTP_402_PAYMENT_REQUIRED)
 
             found_plot.comment = new_comment
@@ -423,8 +424,7 @@ class CommentOnBoard(APIView):
             # if(CheckBoardTerminated(found_board)):
             #     # FCM to Manager
             # else:
-                
-        
+                    
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
             
 

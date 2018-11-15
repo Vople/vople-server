@@ -78,4 +78,9 @@ urlpatterns = [
         view=views.GetScriptView.as_view(),
         name='get_script',
     ),
+    url(
+        regex=r'^(?P<board_id>[0-9]+)/plots/',
+        view=views.GetPlotView.as_view(),
+        name='get_plots',
+    )
 ]

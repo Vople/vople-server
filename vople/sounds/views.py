@@ -116,16 +116,18 @@ class ListAllBoards(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         if serializer.is_valid():
-            serializer.save(
+            board = serializer.save(
                 owner=user,
                 mode=mode,
                 script=found_script,
                 )
 
+            serializer = serializers.BoardBreifSerializer(board)
+
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
         else:
-            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class JoinBoardViewSet(APIView):
 
@@ -490,5 +492,24 @@ class GetScriptView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = serializers.ScriptSerializer(found_script)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+class GetPlotView(APIView):
+    def get(self, request, board_id, format=None):
+        user = request.user
+
+        try:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        script = found_board.script
+
+        found_cast = script.casts.all().get(member=user)
+
+        plots = found_cast.plots_by_cast.all()
+
+        serializer = serializers.PlotSerializer(plots, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)

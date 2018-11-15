@@ -159,6 +159,7 @@ class BoardSerializer(serializers.ModelSerializer):
 class BoardDetailSerializer(serializers.ModelSerializer):
 
     comments = CommentBriefSerializer(many=True)
+    script = ScriptSerializer()
 
     class Meta:
         model = models.Board

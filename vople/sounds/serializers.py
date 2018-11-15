@@ -197,7 +197,6 @@ class InputBoardSerializer(serializers.ModelSerializer):
         fields = (
             'title',
             'content',
-            'due_date',
         )
 
 class EdibleRollNumberSerializer(serializers.Serializer):

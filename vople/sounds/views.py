@@ -156,9 +156,6 @@ class JoinBoardViewSet(APIView):
             if serializer.is_valid():
                 return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
 
-
-            
-
         member_restriction = found_board.script.member_restriction
 
         current_members = found_board.joined_member.all().count()

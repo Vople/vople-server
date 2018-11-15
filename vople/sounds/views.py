@@ -98,6 +98,16 @@ class ListAllBoards(APIView):
 
         mode = request.data['mode']
 
+        if(mode == BOARD_FREE_MODE):
+            if serializer.is_valid():
+                serializer.save(
+                    owner = user,
+                    mode=BOARD_FREE_MODE, 
+                    script=None)
+                return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+            else: 
+                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         script_id = request.data['script_id']
 
         try:
@@ -107,7 +117,7 @@ class ListAllBoards(APIView):
 
         if serializer.is_valid():
             serializer.save(
-                owner = user,
+                owner=user,
                 mode=mode,
                 script=found_script,
                 )

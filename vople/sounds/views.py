@@ -409,7 +409,7 @@ class ScriptViewSet(APIView):
         
         scripts = models.Script.objects.all()
 
-        serializer = serializers.ScriptSerializer(scripts, many=True)
+        serializer = serializers.ScriptNameSerializer(scripts, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)        
 

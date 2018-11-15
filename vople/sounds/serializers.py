@@ -23,6 +23,16 @@ class ScriptBriefSerializer(serializers.ModelSerializer):
             'title',
         )
 
+class ScriptNameSerializer(serializer.ModelSerializer):
+
+    class Meta:
+        model = models.Script
+        fields = (
+            'id',
+            'title',
+            'member_restriction',
+        )
+
 class UserBriefSerializer(serializers.ModelSerializer):
 
     class Meta:

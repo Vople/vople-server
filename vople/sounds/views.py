@@ -506,7 +506,16 @@ class GetPlotView(APIView):
 
         script = found_board.script
 
-        found_cast = script.casts.all().get(member__id=user.id)
+        casts = script.casts.all()
+
+        found_cast = None
+
+        for cast in casts:
+            if cast.member == user:
+                found_cast = cast
+
+        if found_cast == None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
         plots = found_cast.plots_by_cast.all()
 

@@ -131,6 +131,8 @@ class JoinBoardViewSet(APIView):
 
     def get(self, request, board_id, format=None):
 
+        user = request.user
+
         try:
             found_board = models.Board.objects.get(id=board_id)
         except models.Board.DoesNotExist:
@@ -138,6 +140,21 @@ class JoinBoardViewSet(APIView):
 
         if found_board.mode == BOARD_FREE_MODE:
             return Response(status=status.HTTP_200_OK)
+
+        flag_join_accept = True
+
+        try:
+            _user = found_board.joined_member.all().get(id=user.id)
+        except User.DoesNotExist:
+            flag_join_accept = False
+
+        # Already Joined
+        if(flag_join_accept):
+            
+            serializer = serializers.EdibleRollNumberSerializer(data={"rolls":[]})
+
+            return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
+            
 
         member_restriction = found_board.script.member_restriction
 
@@ -209,6 +226,27 @@ class JoinBoardViewSet(APIView):
         serializer = serializers.CastSerializer(found_cast)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, board_id, format=None):
+        
+        user = request.user
+
+        try:
+            found_board = models.Board.objects.get(id=board_id)
+        except models.Board.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if found_board.mode == BOARD_FREE_MODE:
+            return Response(status=status.HTTP_200_OK)
+
+        try:
+            found_cast = found_board.script.casts.get(member=user)
+        except models.Cast.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = serializers.CastSerializer(found_cast)
+
+        return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
 class ListAllComments(APIView):

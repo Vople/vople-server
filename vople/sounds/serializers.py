@@ -23,7 +23,7 @@ class ScriptBriefSerializer(serializers.ModelSerializer):
             'title',
         )
 
-class ScriptNameSerializer(serializer.ModelSerializer):
+class ScriptNameSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Script

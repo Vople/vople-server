@@ -153,7 +153,10 @@ class JoinBoardViewSet(APIView):
             
             serializer = serializers.EdibleRollNumberSerializer(data={"rolls":[]})
 
-            return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
+            if serializer.is_valid():
+                return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
             
 
         member_restriction = found_board.script.member_restriction

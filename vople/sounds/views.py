@@ -414,7 +414,7 @@ class CommentOnBoard(APIView):
                     board = found_board
                 )
             else:
-                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(data=serializer.errors, status=status.HTTP_402_PAYMENT_REQUIRED)
 
             found_plot.comment = new_comment
         

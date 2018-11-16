@@ -84,6 +84,12 @@ class ListAllBoards(APIView):
         except EmptyPage:
             boards = paginator.page(paginator.num_pages)
 
+        Device = get_device_model()
+
+        testDevice = Device.objects.get(user__id=request.user.id)
+        testDevice.send_message({'message': '[' + order.order_time.strftime('%Y-%m-%d') + '] ' +
+                                                        order.beverages.first().beverage.name + " 및 " + str(order.beverages.count() - 1) + "잔" + '이 주문되었습니다!','code':3},
+                                                collapse_key="음료가 주문되었습니다!")
 
         serializer = serializers.BoardBreifSerializer(boards, many=True)
 

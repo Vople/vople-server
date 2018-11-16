@@ -57,7 +57,7 @@ class Board(TimeStampedModel):
 class Comment(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=True, related_name="comments")
-    content = models.TextField(blank=True)
+    content = models.TextField(blank=True, null=True)
     sound = models.FileField(null=True)
 
     def __str__(self):

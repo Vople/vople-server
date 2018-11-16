@@ -36,10 +36,10 @@ class DeviceViewSet(viewsets.ModelViewSet):
 
         device = models.MyDevice.objects.filter(dev_id=request.data['dev_id'])
 
-        if device.count()==0 :
+        if device.count() == 0 :
             serializer = serializers.DeviceSerializer(data=request.data)
         else :
-            device=device.first()
+            device = device.first()
             serializer = serializers.DeviceSerializer(device, data=request.data)
 
         if serializer.is_valid():
@@ -47,12 +47,12 @@ class DeviceViewSet(viewsets.ModelViewSet):
             serializer.save(name=request.user.username, user_id=request.user.id,is_active=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST);
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, format=None):
         device = models.MyDevice.objects.filter(name=request.user.username)
 
-        if device.count()==0:
+        if device.count() == 0:
             return Response(status=401)
 
         device=device.first()

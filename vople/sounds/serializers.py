@@ -74,15 +74,25 @@ class CastSerializer(serializers.ModelSerializer):
 
         )
 
+class CastBreifSerializer(serializers.ModelSerializer):
+
+    plots_by_cast = PlotSerializer(many=True)
+
+    class Meta:
+        model = models.Cast
+        fields = (
+            'roll_name',
+            'plots_by_cast',
+        )
+
 class ScriptSerializer(serializers.ModelSerializer):
 
-    casts = CastSerializer(many=True)
+    casts = CastBreifSerializer(many=True)
 
     class Meta:
         model = models.Script
         fields = (
             'id',
-            'owner',
             'member_restriction',
             'casts',
             'title',

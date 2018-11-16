@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
-
-
 from . import models
 
 class UserSerializer(serializers.ModelSerializer):

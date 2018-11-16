@@ -1,8 +1,20 @@
 from rest_framework import serializers
 from . import models
-from vople.users.serializers import UserSerializer, UserBriefSerializer
+from vople.users.serializers import UserSerializer
 from vople.users import models as user_model
 from rest_framework import pagination
+
+
+
+class UserBriefSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = user_model.User
+        fields = (
+            'name',
+        )
+
+
 
 class DeviceSerializer(serializers.ModelSerializer):
 
@@ -45,14 +57,6 @@ class ScriptNameSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'member_restriction',
-        )
-
-class UserBriefSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = user_model.User
-        fields = (
-            'name',
         )
 
 class PresentSerializer(serializers.ModelSerializer):

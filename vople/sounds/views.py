@@ -6,6 +6,7 @@ from vople.users import models as user_model
 from . import models, serializers
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
+from fcm.utils import get_device_model
 from rest_framework import viewsets
 
 BOARD_FREE_MODE = 0

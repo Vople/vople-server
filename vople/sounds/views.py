@@ -90,10 +90,15 @@ class ListAllBoards(APIView):
         Device = get_device_model()
 
         try:
-            testDevice = Device.objects.get(user=request.user)
+            devices = Device.objects.filter(user=request.user)
         except Device.DoesNotExist:
             return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
-            
+
+        if not devices.count()==0 :
+            testDevice=cafeDevice.first()
+        else:
+            testDevice = devices
+                    
         testDevice.send_message(data={"test": "test"})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)

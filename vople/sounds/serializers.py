@@ -23,6 +23,20 @@ class ScriptBriefSerializer(serializers.ModelSerializer):
             'title',
         )
 
+
+class CommentBriefSerializer(serializers.ModelSerializer):
+
+    owner = UserBriefSerializer()
+
+    class Meta:
+        model = models.Comment
+        fields = (
+            'owner',
+            'sound',
+            'created_at',
+        )
+
+
 class ScriptNameSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -52,12 +66,15 @@ class PresentSerializer(serializers.ModelSerializer):
 
 class PlotSerializer(serializers.ModelSerializer):
 
+    comment = CommentBriefSerializer()
+
     class Meta:
         model = models.Plot
         fields = (
             'id',
             'content',
             'order',
+            'comment',
         )
 
 class CastSerializer(serializers.ModelSerializer):
@@ -131,18 +148,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'content',
             'sound',
             'comment_likes',
-        )
-
-class CommentBriefSerializer(serializers.ModelSerializer):
-
-    owner = UserBriefSerializer()
-
-    class Meta:
-        model = models.Comment
-        fields = (
-            'owner',
-            'sound',
-            'created_at',
         )
 
 class BoardSerializer(serializers.ModelSerializer):

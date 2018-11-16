@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from . import models
-from vople.users.serializers import UserSerializer
+from vople.users.serializers import UserSerializer, UserBriefSerializer
 from vople.users import models as user_model
 from rest_framework import pagination
 

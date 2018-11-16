@@ -536,3 +536,13 @@ class GetPlotView(APIView):
         serializer = serializers.PlotSerializer(plots, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+class GetEventBoardView(APIView):
+    def get(self, request, format=None):
+
+        event_boards = models.Board.objects.filter(owner__id=1)
+
+        serializer = serializers.BoardBreifSerializer(event_boards, many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)

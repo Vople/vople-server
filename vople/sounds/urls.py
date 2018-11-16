@@ -83,4 +83,9 @@ urlpatterns = [
         view=views.GetPlotView.as_view(),
         name='get_plots',
     ),
+    url(
+        regex=r'^event/'
+        view=views.GetEventBoardView.as_view(),
+        name='event_board',
+    )
 ]

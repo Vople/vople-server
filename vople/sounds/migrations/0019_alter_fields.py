@@ -13,8 +13,6 @@ class Migration(migrations.Migration):
             name='Casting',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
                 ('script', models.ForeignKey(on_delete=models.CASCADE, to='sounds.Script')),
                 ('cast', models.ForeignKey(on_delete=models.CASCADE, to='sounds.Cast')),
                 ('member', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL, related_name="my_casts")),

@@ -12,7 +12,8 @@ class Migration(migrations.Migration):
         migrations.RemoveField(
             model_name='casting',
             name='created_at',
-        )
+        ),
+        
         migrations.RemoveField(
             model_name='casting',
             name='updated_at',

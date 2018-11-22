@@ -11,26 +11,27 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
+class Cast(TimeStampedModel):
+#   script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="my_casts")
+    roll_name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.roll_name
+
+
 class Script(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
     member_restriction = models.IntegerField(default=0, null=False)
     is_accept = models.BooleanField(default=False)
     title = models.CharField(max_length=100, default="__REMOVE__")
     casts = models.ManyToManyField(
-        'Cast',
+        Cast,
         through='Casting',
         through_fields=('script', 'cast'),
     )
 
     def __str__(self):
         return self.title
-
-class Cast(TimeStampedModel):
-    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="my_casts")
-    roll_name = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.roll_name
 
 
 class Present(TimeStampedModel):

@@ -114,7 +114,7 @@ class ListAllBoards(APIView):
 
         if(mode == BOARD_FREE_MODE):
             if serializer.is_valid():
-                serializer.save(
+                new_board = serializer.save(
                     owner = user,
                     mode=BOARD_FREE_MODE, 
                     script=None)
@@ -136,10 +136,20 @@ class ListAllBoards(APIView):
                 script=found_script,
                 )
 
+            found_casts = found_script.casts
+
+            for cast in found_casts:
+                new_casting = models.Casting.objects.create(
+                    board=board,
+                    script=found_script,
+                    cast=cast,
+                )
+
+                new_casting.save()
+
             serializer = serializers.BoardBreifSerializer(board)
 
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -258,11 +268,11 @@ class JoinBoardViewSet(APIView):
             return Response(status=status.HTTP_200_OK)
 
         try:
-            found_cast = found_board.script.casts.get(member=user)
-        except models.Cast.DoesNotExist:
+            found_casting = found_board.castings.get(member=user)
+        except models.Casting.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = serializers.CastSerializer(found_cast)
+        serializer = serializers.CastingSerializer(found_casting)
 
         return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
 
@@ -430,12 +440,14 @@ class CommentOnBoard(APIView):
                     board = found_board
                 )
             else:
-                print(serializer.errors)
                 return Response(data=serializer.errors, status=status.HTTP_402_PAYMENT_REQUIRED)
 
-            found_plot.comment = new_comment
-        
-            found_plot.save()
+            new_commenting = models.Commenting.objects.create(
+                board=found_board,
+                comment=new_comment
+            )
+
+            new_commenting.save()
 
             # if(CheckBoardTerminated(found_board)):
             #     # FCM to Manager
@@ -522,18 +534,18 @@ class GetPlotView(APIView):
 
         script = found_board.script
 
-        casts = script.casts.all()
+        castings = found_board.castings.all()
 
-        found_cast = None
+        found_casting = None
 
-        for cast in casts:
-            if cast.member == user:
-                found_cast = cast
+        for casting in castings:
+            if casting.member == user:
+                found_casting = casting
 
-        if found_cast == None:
+        if found_casting == None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        plots = found_cast.plots_by_cast.all()
+        plots = found_casting.cast.plots_by_cast.all()
 
         serializer = serializers.PlotSerializer(plots, many=True)
 

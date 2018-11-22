@@ -79,7 +79,6 @@ class PlotSerializer(serializers.ModelSerializer):
             'comment',
         )
 
-
 class CastingSerializer(serializers.ModelSerializer):
 
     class Meta:

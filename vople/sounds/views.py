@@ -226,7 +226,7 @@ class JoinBoardViewSet(APIView):
 
         found_casting = None
         
-        for casting in found_board.casting.all():
+        for casting in found_board.castings.all():
             if casting.cast.roll_name == roll_name:
                 found_casting = casting
                     

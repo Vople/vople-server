@@ -14,7 +14,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('board', models.ForeignKey(on_delete=models.CASCADE, related_name="commentings", to='sounds.Board')),
-                ('plot', models.ForeignKey(on_delete=models.CASCADE, to='sounds.Plot')),
                 ('comment', models.ForeignKey(blank=True, on_delete=models.CASCADE, to='sounds.Comment')),
             ],
             options={

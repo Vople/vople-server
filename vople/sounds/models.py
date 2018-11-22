@@ -81,7 +81,6 @@ class Comment(TimeStampedModel):
 
 class Commenting(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="commentings")
-    plot = models.ForeignKey(to='sounds.Plot', on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     
     def __str__(self):

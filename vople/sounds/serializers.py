@@ -103,13 +103,11 @@ class CastingSerializer(serializers.ModelSerializer):
 
 class CastBreifSerializer(serializers.ModelSerializer):
 
-    plots_by_cast = PlotSerializer(many=True)
-
     class Meta:
         model = models.Cast
         fields = (
             'roll_name',
-            'plots_by_cast',
+            'script_title',
         )
 
 class ScriptSerializer(serializers.ModelSerializer):

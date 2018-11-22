@@ -41,10 +41,12 @@ class PresentAdmin(admin.ModelAdmin):
 class PlotAdmin(admin.ModelAdmin):
     list_display = (
         'cast',
-        'comment',
+        'commenting',
         'id',
         'order',
     )
+
+    
 
 @admin.register(models.Script)
 class ScriptAdmin(admin.ModelAdmin):

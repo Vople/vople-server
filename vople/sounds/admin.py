@@ -57,6 +57,9 @@ class ScriptAdmin(admin.ModelAdmin):
         'id',
     )
 
+    def get_casts(self, obj):
+        return obj.get_casts()
+
 @admin.register(models.Cast)
 class CastAdmin(admin.ModelAdmin):
     list_display = (

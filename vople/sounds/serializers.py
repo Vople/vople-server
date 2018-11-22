@@ -125,42 +125,6 @@ class BoardBreifSerializer(serializers.ModelSerializer):
         )
 
 
-class ScriptSerializer(serializers.ModelSerializer):
-
-    casts = CastSerializer(many=True)
-
-    class Meta:
-        model = models.Script
-        fields = (
-            'id',
-            'member_restriction',
-            'casts',
-            'title',
-        )
-
-
-
-class BoardSerializer(serializers.ModelSerializer):
-
-    owner = UserBriefSerializer()
-    comments = CommentSerializer(many=True)
-    board_likes = BoardLikeSerializer(many=True)
-    script = ScriptSerializer()
-
-    class Meta:
-        model = models.Board
-        fields = (
-            'id',
-            'owner',
-            'title',
-            'content',
-            'due_date',
-            'comments',
-            'board_likes',
-            'script',
-            'joined_member',
-        )
-
 class BoardDetailSerializer(serializers.ModelSerializer):
 
     comments = CommentBriefSerializer(many=True)
@@ -214,6 +178,44 @@ class CastSerializer(serializers.ModelSerializer):
             'plots_by_cast',
         )
 
+
+
+
+class ScriptSerializer(serializers.ModelSerializer):
+
+    casts = CastSerializer(many=True)
+
+    class Meta:
+        model = models.Script
+        fields = (
+            'id',
+            'member_restriction',
+            'casts',
+            'title',
+        )
+
+
+
+class BoardSerializer(serializers.ModelSerializer):
+
+    owner = UserBriefSerializer()
+    comments = CommentSerializer(many=True)
+    board_likes = BoardLikeSerializer(many=True)
+    script = ScriptSerializer()
+
+    class Meta:
+        model = models.Board
+        fields = (
+            'id',
+            'owner',
+            'title',
+            'content',
+            'due_date',
+            'comments',
+            'board_likes',
+            'script',
+            'joined_member',
+        )
 
 class CastingSerializer(serializers.ModelSerializer):
 

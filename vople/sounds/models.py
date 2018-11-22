@@ -11,23 +11,36 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
+class Cast(TimeStampedModel):
+    #script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="casts")
+    roll_name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return "[" + self.script.title + "] " + self.roll_name
+
 class Script(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)
     member_restriction = models.IntegerField(default=0, null=False)
     is_accept = models.BooleanField(default=False)
     title = models.CharField(max_length=100, default="__REMOVE__")
+    casts = models.ManyToManyField(
+        Cast,
+        through='Casting',
+        thorugh_fields=('script', 'cast'),
+        related_name='casts',
+    )
 
     def __str__(self):
         return self.title
 
-class Cast(TimeStampedModel):
-    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="casts")
-    roll_name = models.CharField(max_length=20)
+class Casting(models.Model):
+    script = models.ForeignKey(Script, on_delete=models.CASCADE)
+    cast = models.ForeignKey(Cast, on_delete=models.CASCADE)
     is_adjust = models.BooleanField(default=False)
-    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_casts", null=True)
+    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_castings", null=True)
 
     def __str__(self):
-        return "[" + self.script.title + "] " + self.roll_name
+        return "[" + self.script.title + "]" + self.cast.roll_name + "역의 배역"
 
 class Present(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)

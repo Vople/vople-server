@@ -62,3 +62,12 @@ class CastAdmin(admin.ModelAdmin):
         'roll_name',
         'id',
     )
+
+@admin.register(models.Casting)
+class CastingAdmin(admin.modelAdmin):
+    list_display = (
+        'script',
+        'cast',
+        'is_adjust',
+        'member',
+    )

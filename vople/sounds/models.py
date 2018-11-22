@@ -16,7 +16,7 @@ class Cast(TimeStampedModel):
     roll_name = models.CharField(max_length=20)
 
     def __str__(self):
-        return "[" + self.script.title + "] " + self.roll_name
+        return self.roll_name
 
 class Script(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False)

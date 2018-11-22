@@ -165,7 +165,7 @@ class JoinBoardViewSet(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         if found_board.mode == BOARD_FREE_MODE:
-            return Response(status=status.HTTP_206_PARTIAL_CONTENT)
+            return Response(status=status.HTTP_200_PARTIAL_CONTENT)
 
         flag_join_accept = True
 

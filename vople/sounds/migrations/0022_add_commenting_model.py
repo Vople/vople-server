@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='plot',
             name='comment',
-            model=models.ForeignKey(to='sounds.Commenting', on_delete=models.CASCADE, null=True, blank=True)
+            field=models.ForeignKey(to='sounds.Commenting', on_delete=models.CASCADE, null=True, blank=True)
         ),
         migrations.AddField(
             model_name='casting',

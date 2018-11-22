@@ -12,6 +12,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cast',
             name='script_title',
-            field=script_title = models.CharField(max_length=30, blank=True)
+            field = models.CharField(max_length=30, blank=True)
         ),
     ]

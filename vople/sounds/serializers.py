@@ -128,12 +128,12 @@ class BoardBreifSerializer(serializers.ModelSerializer):
 class CommentingSerializer(serializers.ModelSerializer):
 
     comment = CommentBriefSerializer()
-    #board = BoardBreifSerializer()
+    board = BoardBreifSerializer()
 
     class Meta:
         model = models.Commenting
         fields = (
-     #       'board',
+            'board',
             'comment',
         )
 

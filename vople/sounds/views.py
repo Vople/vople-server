@@ -115,7 +115,7 @@ class ListAllBoards(APIView):
         if(mode == BOARD_FREE_MODE):
             if serializer.is_valid():
                 new_board = serializer.save(
-                    owner = user,
+                    owner=user,
                     mode=BOARD_FREE_MODE, 
                     script=None)
                 return Response(data=serializer.data, status=status.HTTP_201_CREATED)
@@ -530,7 +530,7 @@ class GetScriptView(APIView):
 class GetPlotView(APIView):
     def get(self, request, board_id, format=None):
         user = request.user
-        
+
         try:
             found_board = models.Board.objects.get(id=board_id)
         except models.Board.DoesNotExist:

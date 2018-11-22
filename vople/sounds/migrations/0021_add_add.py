@@ -15,9 +15,9 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(null=True, blank=True)
         ),
         
-        migrations.RemoveField(
+        migrations.AlterField(
             model_name='board',
             name='present',
-            field=models.ForeignKey(to='sounds.Present', on_delete=models.DO_NOTHING, null=True, blank=True)
+            field=models.ForeignKey(to='sounds.Present', on_delete=models.DO_NOTHING, null=True, blank=True),
         )
     ]

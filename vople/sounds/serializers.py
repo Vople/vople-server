@@ -146,7 +146,7 @@ class PlotSerializer(serializers.ModelSerializer):
         model = models.Plot
         fields = (
             'id',
-            'content',
+            #'content',
             'commenting',
             'order',
         )

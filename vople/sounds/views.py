@@ -136,7 +136,7 @@ class ListAllBoards(APIView):
                 script=found_script,
                 )
 
-            found_casts = found_script.casts.all()
+            found_casts = found_script.my_casts.all()
 
             for cast in found_casts:
                 new_casting = models.Casting.objects.create(

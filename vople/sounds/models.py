@@ -32,16 +32,6 @@ class Script(TimeStampedModel):
     def __str__(self):
         return self.title
 
-class Casting(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, realted_name="castings")
-    script = models.ForeignKey(Script, on_delete=models.CASCADE)
-    cast = models.ForeignKey(Cast, on_delete=models.CASCADE)
-    is_adjust = models.BooleanField(default=False)
-    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_castings", null=True)
-
-    def __str__(self):
-        return "[" + self.script.title + "]" + self.cast.roll_name + "역의 배역"
-
 class Present(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
     name = models.CharField(max_length=50)
@@ -65,6 +55,17 @@ class Board(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+
+class Casting(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, realted_name="castings")
+    script = models.ForeignKey(Script, on_delete=models.CASCADE)
+    cast = models.ForeignKey(Cast, on_delete=models.CASCADE)
+    is_adjust = models.BooleanField(default=False)
+    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_castings", null=True)
+
+    def __str__(self):
+        return "[" + self.script.title + "]" + self.cast.roll_name + "역의 배역"
 
 
 class Comment(TimeStampedModel):

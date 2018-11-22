@@ -75,20 +75,6 @@ class CastBreifSerializer(serializers.ModelSerializer):
         )
 
 
-class ScriptSerializer(serializers.ModelSerializer):
-
-    casts = CastBreifSerializer(many=True)
-
-    class Meta:
-        model = models.Script
-        fields = (
-            'id',
-            'member_restriction',
-            'casts',
-            'title',
-        )
-
-
 class CommentLikeSerializer(serializers.ModelSerializer):
 
     owner = UserSerializer(read_only=True)
@@ -122,6 +108,37 @@ class CommentSerializer(serializers.ModelSerializer):
             'sound',
             'comment_likes',
         )
+
+
+class BoardBreifSerializer(serializers.ModelSerializer):
+
+    script = ScriptBriefSerializer()
+
+    class Meta:
+        model = models.Board
+        fields = (
+            'id',
+            'title',
+            'mode',
+            'script',
+            'board_likes',
+        )
+
+
+class ScriptSerializer(serializers.ModelSerializer):
+
+    casts = CastSerializer(many=True)
+
+    class Meta:
+        model = models.Script
+        fields = (
+            'id',
+            'member_restriction',
+            'casts',
+            'title',
+        )
+
+
 
 class BoardSerializer(serializers.ModelSerializer):
 
@@ -157,20 +174,6 @@ class BoardDetailSerializer(serializers.ModelSerializer):
             'script',
         )
 
-class BoardBreifSerializer(serializers.ModelSerializer):
-
-    script = ScriptBriefSerializer()
-
-    class Meta:
-        model = models.Board
-        fields = (
-            'id',
-            'title',
-            'mode',
-            'script',
-            'board_likes',
-        )
-
 
 class CommentingSerializer(serializers.ModelSerializer):
 
@@ -197,8 +200,6 @@ class PlotSerializer(serializers.ModelSerializer):
             'commenting',
             'order',
         )
-
-
 
 class CastSerializer(serializers.ModelSerializer):
 

@@ -64,20 +64,6 @@ class PresentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
-class CastSerializer(serializers.ModelSerializer):
-
-    plots_by_cast = PlotSe
-
-    class Meta:
-        model = models.Cast
-        fields = (
-            'id',
-            'roll_name',
-            'script_title',
-            'plots_by_cast',
-        )
-
 class CastingSerializer(serializers.ModelSerializer):
 
     cast = CastSerializer()
@@ -223,6 +209,21 @@ class PlotSerializer(serializers.ModelSerializer):
             'content',
             'commenting',
             'order',
+        )
+
+
+
+class CastSerializer(serializers.ModelSerializer):
+
+    plots_by_cast = PlotSerializer()
+
+    class Meta:
+        model = models.Cast
+        fields = (
+            'id',
+            'roll_name',
+            'script_title',
+            'plots_by_cast',
         )
 
 

@@ -64,7 +64,7 @@ class CastAdmin(admin.ModelAdmin):
     )
 
 @admin.register(models.Casting)
-class CastingAdmin(admin.modelAdmin):
+class CastingAdmin(admin.ModelAdmin):
     list_display = (
         'script',
         'cast',

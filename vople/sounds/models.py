@@ -26,7 +26,7 @@ class Script(TimeStampedModel):
     casts = models.ManyToManyField(
         Cast,
         through='Casting',
-        thorugh_fields=('script', 'cast'),
+        through_fields=('script', 'cast'),
     )
 
     def __str__(self):

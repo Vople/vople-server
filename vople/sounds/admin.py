@@ -53,12 +53,8 @@ class ScriptAdmin(admin.ModelAdmin):
         'member_restriction',
         'is_accept',
         'title',
-        'get_casts'
         'id',
     )
-
-    def get_casts(self, obj):
-        return obj.get_casts()
 
 @admin.register(models.Cast)
 class CastAdmin(admin.ModelAdmin):

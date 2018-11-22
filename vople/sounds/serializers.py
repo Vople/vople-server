@@ -77,17 +77,6 @@ class PlotSerializer(serializers.ModelSerializer):
             'comment',
         )
 
-class CastingSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = models.Casting
-        fields = (
-            'id',
-            'cast.roll_name',
-            'cast.plots_by_cast',
-            'member',
-        )
-
 
 class CastSerializer(serializers.ModelSerializer):
 
@@ -98,10 +87,21 @@ class CastSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'roll_name',
-            'plots_by_cast',
-            'member',
-
+            'script_title',
         )
+
+class CastingSerializer(serializers.ModelSerializer):
+
+    cast = CastSerializer()
+
+    class Meta:
+        model = models.Casting
+        fields = (
+            'id',
+            'cast',
+            'member',
+        )
+
 
 class CastBreifSerializer(serializers.ModelSerializer):
 

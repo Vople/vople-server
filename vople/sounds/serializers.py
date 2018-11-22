@@ -125,6 +125,21 @@ class BoardBreifSerializer(serializers.ModelSerializer):
         )
 
 
+
+class ScriptSerializer(serializers.ModelSerializer):
+
+    casts = CastSerializer(many=True)
+
+    class Meta:
+        model = models.Script
+        fields = (
+            'id',
+            'member_restriction',
+            'casts',
+            'title',
+        )
+
+
 class BoardDetailSerializer(serializers.ModelSerializer):
 
     comments = CommentBriefSerializer(many=True)
@@ -179,20 +194,6 @@ class CastSerializer(serializers.ModelSerializer):
         )
 
 
-
-
-class ScriptSerializer(serializers.ModelSerializer):
-
-    casts = CastSerializer(many=True)
-
-    class Meta:
-        model = models.Script
-        fields = (
-            'id',
-            'member_restriction',
-            'casts',
-            'title',
-        )
 
 
 

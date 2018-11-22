@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
             name='Commenting',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('board', models.ForeignKey(on_delete=models.CASCADE, related_name="commentings", to='sounds.Board')),
+                ('board', models.ForeignKey(on_delete=models.CASCADE, related_name="commentings", null=True, to='sounds.Board')),
                 ('comment', models.ForeignKey(blank=True, on_delete=models.CASCADE, to='sounds.Comment')),
             ],
             options={
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='casting',
             name='board',
-            field=models.ForeignKey(to='sounds.Board', on_delete=models.CASCADE, related_name="castings")
+            field=models.ForeignKey(to='sounds.Board', on_delete=models.CASCADE, null=True, related_name="castings")
         ),
 
         migrations.RemoveField(

@@ -33,6 +33,7 @@ class Script(TimeStampedModel):
         return self.title
 
 class Casting(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, realted_name="castings")
     script = models.ForeignKey(Script, on_delete=models.CASCADE)
     cast = models.ForeignKey(Cast, on_delete=models.CASCADE)
     is_adjust = models.BooleanField(default=False)
@@ -78,7 +79,8 @@ class Comment(TimeStampedModel):
 
 class Plot(TimeStampedModel):
     content = models.TextField()
-    comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots", blank=True)
+    #comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots", blank=True)
+    comment = models.ForeignKey(Commenting, on_delete=models.CASCADE, null=True, blank=True)
     order = models.IntegerField(default=0)
     # Add Field
     cast = models.ForeignKey(Cast, related_name="plots_by_cast", null=True, blank=True, on_delete=models.DO_NOTHING)
@@ -90,6 +92,13 @@ class Plot(TimeStampedModel):
         else:
             return self.content
 
+class Commenting(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="commentings")
+    plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.plot.content + " : " + comment.owner.username
 
 class BoardLike(Like):
     board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")

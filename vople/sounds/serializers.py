@@ -64,19 +64,6 @@ class PresentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CastingSerializer(serializers.ModelSerializer):
-
-    cast = CastSerializer()
-
-    class Meta:
-        model = models.Casting
-        fields = (
-            'id',
-            'cast',
-            'member',
-        )
-
-
 
 class CastBreifSerializer(serializers.ModelSerializer):
 
@@ -224,6 +211,19 @@ class CastSerializer(serializers.ModelSerializer):
             'roll_name',
             'script_title',
             'plots_by_cast',
+        )
+
+
+class CastingSerializer(serializers.ModelSerializer):
+
+    cast = CastSerializer()
+
+    class Meta:
+        model = models.Casting
+        fields = (
+            'id',
+            'cast',
+            'member',
         )
 
 

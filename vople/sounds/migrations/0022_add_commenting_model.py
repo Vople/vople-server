@@ -20,9 +20,9 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
         ),
-        migrations.AlterField(
+        migrations.AddField(
             model_name='plot',
-            name='comment',
+            name='commenting',
             field=models.ForeignKey(to='sounds.Commenting', on_delete=models.CASCADE, null=True, blank=True)
         ),
         migrations.AddField(
@@ -30,5 +30,10 @@ class Migration(migrations.Migration):
             name='board',
             field=models.ForeignKey(to='sounds.Board', on_delete=models.CASCADE, related_name="castings")
         ),
+
+        migrations.RemoveField(
+            model_name='plot',
+            name='comment',
+        )
         
     ]

@@ -90,7 +90,7 @@ class Commenting(models.Model):
 class Plot(TimeStampedModel):
     content = models.TextField()
     #comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots", blank=True)
-    comment = models.ForeignKey(Commenting, on_delete=models.CASCADE, null=True, blank=True)
+    commenting = models.ForeignKey(Commenting, on_delete=models.CASCADE, null=True, blank=True)
     order = models.IntegerField(default=0)
     # Add Field
     cast = models.ForeignKey(Cast, related_name="plots_by_cast", null=True, blank=True, on_delete=models.DO_NOTHING)

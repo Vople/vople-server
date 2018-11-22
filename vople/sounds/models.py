@@ -17,7 +17,7 @@ class Script(TimeStampedModel):
     is_accept = models.BooleanField(default=False)
     title = models.CharField(max_length=100, default="__REMOVE__")
     casts = models.ManyToManyField(
-        Cast,
+        'Cast',
         through='Casting',
         through_fields=('script', 'cast'),
     )

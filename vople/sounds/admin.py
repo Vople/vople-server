@@ -46,7 +46,7 @@ class PlotAdmin(admin.ModelAdmin):
         'order',
     )
 
-    
+
 
 @admin.register(models.Script)
 class ScriptAdmin(admin.ModelAdmin):
@@ -73,3 +73,7 @@ class CastingAdmin(admin.ModelAdmin):
         'is_adjust',
         'member',
     )
+
+@admin.register(models.Commenting)
+class CommentingAdmin(admin.ModelAdmin):
+    pass

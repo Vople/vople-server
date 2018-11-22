@@ -4,8 +4,6 @@ from vople.users.serializers import UserSerializer
 from vople.users import models as user_model
 from rest_framework import pagination
 
-
-
 class UserBriefSerializer(serializers.ModelSerializer):
 
     class Meta:

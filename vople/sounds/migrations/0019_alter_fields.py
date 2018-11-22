@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='script',
             name='casts',
-            field=models.ManyToManyField(to='sounds.Cast', through='Casting', thorugh_fields=('script', 'cast'), related_name='scripts'),
+            field=models.ManyToManyField(to='sounds.Cast', through='Casting', thorugh_fields=('script', 'cast')),
         ),
         
     ]

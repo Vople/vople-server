@@ -53,7 +53,6 @@ class ScriptAdmin(admin.ModelAdmin):
         'member_restriction',
         'is_accept',
         'title',
-        'casts'
         'id',
     )
 

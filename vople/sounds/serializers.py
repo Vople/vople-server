@@ -82,8 +82,6 @@ class PlotSerializer(serializers.ModelSerializer):
 
 class CastingSerializer(serializers.ModelSerializer):
 
-    cast.plots_by_cast = PlotSerializer(many=True)
-
     class Meta:
         model = models.Casting
         fields = (

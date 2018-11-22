@@ -32,6 +32,12 @@ class Script(TimeStampedModel):
     def __str__(self):
         return self.title
 
+    def get_casts(self):
+        result = ""
+        for cast in casts:
+            result = result + cast.roll_name
+        return result
+
 class Casting(models.Model):
     script = models.ForeignKey(Script, on_delete=models.CASCADE)
     cast = models.ForeignKey(Cast, on_delete=models.CASCADE)

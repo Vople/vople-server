@@ -449,6 +449,10 @@ class CommentOnBoard(APIView):
 
             new_commenting.save()
 
+            found_plot.commenting = new_commenting
+
+            found_plot.save()
+
             # if(CheckBoardTerminated(found_board)):
             #     # FCM to Manager
             # else:

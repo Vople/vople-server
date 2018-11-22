@@ -54,10 +54,10 @@ class Like(TimeStampedModel):
 
 class Board(TimeStampedModel):
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=False, related_name="my_boards")
-    present = models.ForeignKey(Present, on_delete=models.DO_NOTHING, null=True)
+    present = models.ForeignKey(Present, on_delete=models.DO_NOTHING, null=True, blank=True)
     title = models.CharField(max_length=100)
     content = models.TextField(default="_REMOVE_")
-    due_date = models.DateTimeField(null=True)
+    due_date = models.DateTimeField(null=True, blank=True)
     joined_member = models.ManyToManyField(User, blank=True)
     script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, null=True, blank=True, related_name="scripts") # scripts->boards
     mode = models.IntegerField(default=0, null=False)

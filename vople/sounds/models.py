@@ -14,7 +14,7 @@ class TimeStampedModel(models.Model):
 class Cast(TimeStampedModel):
 #   script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="my_casts")
     roll_name = models.CharField(max_length=20)
-    script_title = models.CharField(max_length=30)
+    script_title = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.roll_name
@@ -87,7 +87,7 @@ class Commenting(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.plot.content + " : " + comment.owner.username
+        return self.board.title + " : " + comment.owner.username
 
 
 class Plot(TimeStampedModel):

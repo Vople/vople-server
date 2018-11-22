@@ -3,14 +3,6 @@ from vople.users.models import User
 from django.conf import settings
 import django.db.models.deletion
 
-    casts = models.ManyToManyField(
-        Cast,
-        through='Casting',
-        thorugh_fields=('script', 'cast'),
-        related_name='casts',
-    )
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -47,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='script',
             name='casts',
-            field=models.ManyToManyField(to='sounds.Cast', through='Casting', thorugh_fields=('script', 'cast'), related_name='casts'),
+            field=models.ManyToManyField(to='sounds.Cast', through='Casting', thorugh_fields=('script', 'cast'), related_name='scripts'),
         ),
         
     ]

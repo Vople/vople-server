@@ -27,7 +27,7 @@ class Script(TimeStampedModel):
         Cast,
         through='Casting',
         thorugh_fields=('script', 'cast'),
-        related_name='casts',
+        related_name='scripts',
     )
 
     def __str__(self):

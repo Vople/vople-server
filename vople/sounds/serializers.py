@@ -64,19 +64,6 @@ class PresentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PlotSerializer(serializers.ModelSerializer):
-
-    comment = CommentBriefSerializer()
-
-    class Meta:
-        model = models.Plot
-        fields = (
-            'id',
-            'content',
-            'order',
-            'comment',
-        )
-
 
 class CastSerializer(serializers.ModelSerializer):
 
@@ -101,6 +88,7 @@ class CastingSerializer(serializers.ModelSerializer):
         )
 
 
+
 class CastBreifSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -109,6 +97,23 @@ class CastBreifSerializer(serializers.ModelSerializer):
             'roll_name',
             'script_title',
         )
+
+
+class PlotSerializer(serializers.ModelSerializer):
+
+    commenting = CommentBriefSerializer()
+    cast = CastBreifSerializer()
+
+    class Meta:
+        model = models.Plot
+        fields = (
+            'id',
+            'content',
+            'commenting',
+            'order',
+            'cast',
+        )
+
 
 class ScriptSerializer(serializers.ModelSerializer):
 
@@ -205,6 +210,20 @@ class BoardBreifSerializer(serializers.ModelSerializer):
             'script',
             'board_likes',
         )
+
+
+class CommentingSerializer(serializers.ModelSerializer):
+
+    comment = CommentBriefSerializer()
+    board = BoardBreifSerializer()
+
+    class Meta:
+        model = models.Commenting
+        fields = (
+            'board',
+            'comment',
+        )
+
 
 class InputSoundSerializer(serializers.ModelSerializer):
 

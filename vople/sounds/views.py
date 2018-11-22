@@ -530,7 +530,7 @@ class GetScriptView(APIView):
 class GetPlotView(APIView):
     def get(self, request, board_id, format=None):
         user = request.user
-
+        
         try:
             found_board = models.Board.objects.get(id=board_id)
         except models.Board.DoesNotExist:

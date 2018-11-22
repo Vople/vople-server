@@ -12,7 +12,7 @@ class TimeStampedModel(models.Model):
 
 
 class Cast(TimeStampedModel):
-    #script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="casts")
+    script = models.ForeignKey(Script, on_delete=models.DO_NOTHING, related_name="my_casts")
     roll_name = models.CharField(max_length=20)
 
     def __str__(self):

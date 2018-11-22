@@ -36,7 +36,7 @@ class Casting(models.Model):
     script = models.ForeignKey(Script, on_delete=models.CASCADE)
     cast = models.ForeignKey(Cast, on_delete=models.CASCADE)
     is_adjust = models.BooleanField(default=False)
-    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_castings", null=True)
+    member = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, related_name="my_castings", null=True, blank=True)
 
     def __str__(self):
         return "[" + self.script.title + "]" + self.cast.roll_name + "역의 배역"

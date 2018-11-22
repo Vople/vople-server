@@ -87,7 +87,7 @@ class Commenting(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.board.title + " : " + comment.owner.username
+        return self.board.title + " : " + self.comment.owner.username
 
 
 class Plot(TimeStampedModel):

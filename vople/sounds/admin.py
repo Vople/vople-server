@@ -61,7 +61,7 @@ class ScriptAdmin(admin.ModelAdmin):
 @admin.register(models.Cast)
 class CastAdmin(admin.ModelAdmin):
     list_display = (
-        'script',
+        'script_title',
         'roll_name',
         'id',
     )

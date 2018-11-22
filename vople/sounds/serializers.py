@@ -14,7 +14,18 @@ class UserBriefSerializer(serializers.ModelSerializer):
             'name',
         )
 
+class CastingSerializer(serializers.ModelSerializer):
 
+    cast.plots_by_cast = PlotSerializer(many=True)
+
+    class Meta:
+        model = models.Casting
+        fields = (
+            'id',
+            'cast.roll_name',
+            'cast.plots_by_cast',
+            'member',
+        )
 
 class DeviceSerializer(serializers.ModelSerializer):
 

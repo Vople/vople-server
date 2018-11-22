@@ -87,19 +87,19 @@ class ListAllBoards(APIView):
 
         serializer = serializers.BoardBreifSerializer(boards, many=True)
 
-        Device = get_device_model()
+        # Device = get_device_model()
 
-        try:
-            devices = Device.objects.filter(user=request.user)
-        except Device.DoesNotExist:
-            return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
+        # try:
+        #     devices = Device.objects.filter(user=request.user)
+        # except Device.DoesNotExist:
+        #     return Response(data=serializer.data, status=status.HTTP_202_ACCEPTED)
 
-        if not devices.count()==0 :
-            testDevice=cafeDevice.first()
-        else:
-            testDevice = devices
+        # if not devices.count()==0 :
+        #     testDevice=cafeDevice.first()
+        # else:
+        #     testDevice = devices
                     
-        testDevice.send_message(data={"test": "test"})
+        # testDevice.send_message(data={"test": "test"})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -181,10 +181,10 @@ class JoinBoardViewSet(APIView):
 
         edible_rolls = []
 
-        for cast in found_board.script.casts.all():
-            if cast.is_adjust == False:
-                if cast.roll_name not in edible_rolls:
-                    edible_rolls.append(cast.roll_name)
+        for casting in found_board.castings.all():
+            if casting.is_adjust == False:
+                if cast.cast.roll_name not in edible_rolls:
+                    edible_rolls.append(casting.cast.roll_name)
 
         if len(edible_rolls) <= 0 :
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -198,8 +198,6 @@ class JoinBoardViewSet(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
-
-
     def post(self, request, board_id, format=None):
         
         user = request.user
@@ -216,30 +214,34 @@ class JoinBoardViewSet(APIView):
             found_board.save()
             return Response(status=status.HTTP_200_OK)
 
-        try:
-            found_cast = found_board.script.casts.get(roll_name=roll_name)
-        except models.Cast.DoesNotExist:
+        found_casting = None
+        
+        for casting in found_board.casting.all():
+            if casting.cast.roll_name == roll_name:
+                found_casting = casting
+                    
+        if found_casting == None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        if found_cast.is_adjust == True:
+        if found_casting.is_adjust == True:
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
-        found_plots = found_cast.plots_by_cast.all()
+        found_plots = found_casting.cast.plots_by_cast.all()
 
         if len(found_plots) <= 0 :
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        found_cast.is_adjust = True
+        found_casting.is_adjust = True
 
-        found_cast.member = user
+        found_casting.member = user
         
-        found_cast.save()
+        found_casting.save()
 
         found_board.joined_member.add(user)
 
         found_board.save()
 
-        serializer = serializers.CastSerializer(found_cast)
+        serializer = serializers.CastingSerializer(found_casting)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 

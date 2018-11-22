@@ -58,7 +58,7 @@ class Board(TimeStampedModel):
 
 
 class Casting(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, null=True,      related_name="castings")
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, null=True, related_name="castings")
     script = models.ForeignKey(Script, on_delete=models.CASCADE)
     cast = models.ForeignKey(Cast, on_delete=models.CASCADE)
     is_adjust = models.BooleanField(default=False)

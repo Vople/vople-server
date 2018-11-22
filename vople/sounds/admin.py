@@ -53,15 +53,13 @@ class ScriptAdmin(admin.ModelAdmin):
         'member_restriction',
         'is_accept',
         'title',
+        'casts'
         'id',
     )
 
 @admin.register(models.Cast)
 class CastAdmin(admin.ModelAdmin):
     list_display = (
-        'script',
         'roll_name',
-        'is_adjust',
-        'member',
         'id',
     )

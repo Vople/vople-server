@@ -78,6 +78,16 @@ class Comment(TimeStampedModel):
         return self.board.title
 
 
+
+class Commenting(models.Model):
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="commentings")
+    plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.plot.content + " : " + comment.owner.username
+
+
 class Plot(TimeStampedModel):
     content = models.TextField()
     #comment = models.ForeignKey(Comment, on_delete=models.DO_NOTHING, null=True, related_name="comment_plots", blank=True)
@@ -92,15 +102,6 @@ class Plot(TimeStampedModel):
             return self.cast.roll_name + " : " + self.content
         else:
             return self.content
-
-class Commenting(models.Model):
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="commentings")
-    plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.plot.content + " : " + comment.owner.username
-
 class BoardLike(Like):
     board = models.ForeignKey(Board, on_delete=models.DO_NOTHING, null=False, related_name="board_likes")
 

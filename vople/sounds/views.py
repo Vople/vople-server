@@ -136,7 +136,7 @@ class ListAllBoards(APIView):
                 script=found_script,
                 )
 
-            found_casts = found_script.my_casts.all()
+            found_casts = models.Cast.objects.filter(script_title=found_script.title)
 
             for cast in found_casts:
                 new_casting = models.Casting.objects.create(
@@ -193,7 +193,7 @@ class JoinBoardViewSet(APIView):
 
         for casting in found_board.castings.all():
             if casting.is_adjust == False:
-                if cast.cast.roll_name not in edible_rolls:
+                if casting.cast.roll_name not in edible_rolls:
                     edible_rolls.append(casting.cast.roll_name)
 
         if len(edible_rolls) <= 0 :

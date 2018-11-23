@@ -65,7 +65,7 @@ class Board(TimeStampedModel):
         plotList = {}
         if self.mode == 1:
             for cast in self.script.casts.all():
-                for plot in cast.plots_by_cast:
+                for plot in cast.plots_by_cast.all():
                     plotList[plot.order] = plot.content
 
         od = collections.OrderedDict(sorted(plotList.items()))

@@ -71,7 +71,7 @@ class Board(TimeStampedModel):
         od = collections.OrderedDict(sorted(plotList.items()))
         
         for value in od.values():
-            result = result + value
+            result = result + value + "\n"
         
         return result
 

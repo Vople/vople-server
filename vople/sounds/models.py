@@ -64,7 +64,7 @@ class Board(TimeStampedModel):
         result = ""
         plotList = {}
         if self.mode == 1:
-            for cast in self.script.casts:
+            for cast in self.script.casts.all():
                 for plot in cast.plots_by_cast:
                     plotList[plot.order] = plot.content
 

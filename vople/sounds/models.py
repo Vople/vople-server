@@ -61,6 +61,10 @@ class Board(TimeStampedModel):
         return self.title
 
     def get_all_plots(self):
+
+        if self.mode == 0:
+            return ""
+
         result = ""
         plotList = {}
         if self.mode == 1:

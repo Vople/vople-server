@@ -1,6 +1,7 @@
 from django.db import models
 from vople.users.models import User
 from fcm.models import AbstractDevice
+import collections
 
 # Create your models here.
 class TimeStampedModel(models.Model):
@@ -59,6 +60,20 @@ class Board(TimeStampedModel):
     def __str__(self):
         return self.title
 
+    def get_all_plots(self):
+        result = ""
+        plotList = {}
+        if self.mode == 1:
+            for cast in self.script.casts:
+                for plot in cast.plots_by_cast:
+                    plotList[plot.order] = plot.content
+
+        od = collections.OrderedDict(sorted(plotList.items()))
+        
+        for value in od.values():
+            result = result + value
+        
+        return result
 
 class Casting(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE, null=True, related_name="castings")

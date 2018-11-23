@@ -190,6 +190,7 @@ class BoardDetailSerializer(serializers.ModelSerializer):
             'title',
             'comments',
             'script',
+            'get_all_plots',
         )
 
 

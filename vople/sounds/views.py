@@ -73,7 +73,7 @@ class ListAllBoards(APIView):
 
         boards = models.Board.objects.all()
 
-        paginator = Paginator(boards, 20)
+        paginator = Paginator(boards, 100)
 
         page = request.GET.get('page')
 
